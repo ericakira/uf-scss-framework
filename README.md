@@ -1,1 +1,1 @@
-# uf-scss-framework
+# ユーティリティファーストなscssフレームワーク
