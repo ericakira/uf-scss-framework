@@ -1,0 +1,224 @@
+@use "../global" as *;
+
+/* -----------------------------
+
+component style
+
+----------------------------- */
+
+// hover時の挙動
+
+.hov-ptn01 {
+  transition: 0.2s;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  &:before,
+  &:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    background: $baseColor;
+    left: 0;
+  }
+  &:before {
+    top: 100%;
+    transition: top 0s;
+  }
+  &:after {
+    top: -100%;
+    transition: top 0.2s ease-in;
+  }
+  @include hover {
+    color: #fff;
+    &:before {
+      top: 0;
+      transition: 0.2s ease-out;
+    }
+    &:after {
+      top: 0;
+      transition: top 0s 0.2s;
+    }
+  }
+}
+
+.hov-ptn02 {
+  transition: 0.2s;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  &:after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    transition: 0.2s;
+  }
+  @include hover {
+    &:after {
+      right: 0;
+    }
+  }
+}
+
+.hov-ptn03 {
+  transition: 0.2s;
+  @include hover {
+    opacity: 0.7;
+  }
+}
+
+// 電話番号のリンクはPC時は非表示
+
+.tel-link {
+  pointer-events: none;
+  @include mqS {
+    pointer-events: all;
+  }
+}
+
+// モーダルscss一式
+// @include mqSはスマホ用メディアクエリ
+
+$modalMaxWidth: 80vw; //モーダル表示の最大幅
+$modalPadding: 3vw; //モーダル内のpadding
+$modalCloseSize: 40px; //閉じるボタンの大きさ
+$modalCloseSizeSp: 30px; //閉じるボタンの大きさスマホ用
+$modalClosePosition: 10px; //閉じるボタンのポジション(右上から)
+$modalClosePositionSp: 5px; //閉じるボタンのポジションスマホ用
+$modalCloseThickness: 2px; //閉じるボタンの太さ
+$modalCloseColor: #fff; //閉じるボタンの色
+$modalArrowSize: 5vw; //左右矢印の大きさ
+$modalBgColor: rgba(0, 0, 0, 0.5); //モーダル背面の背景色
+
+.modal-content {
+  display: none;
+  &.modal-show {
+    display: block;
+    animation: showModal 0.4s 1 ease-out forwards;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 9999;
+    width: 100%;
+    max-width: $modalMaxWidth;
+    background: #fff;
+    overflow: scroll;
+    padding: $modalPadding;
+    min-height: 100px;
+  }
+  &.img-gallery {
+    padding: 0; //画像を表示領域いっぱいに出したい時につけると吉
+  }
+}
+
+// キャプションみたいなテキストを出したい時
+.modal-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 10px;
+}
+
+.modal-active {
+  overflow: hidden;
+  height: 100%;
+}
+
+.modal-close {
+  position: fixed;
+  top: $modalClosePosition;
+  right: $modalClosePosition;
+  width: $modalCloseSize;
+  height: $modalCloseSize;
+  z-index: 9999;
+  cursor: pointer;
+  @include mqS {
+    width: $modalCloseSizeSp;
+    height: $modalCloseSizeSp;
+    top: $modalClosePositionSp;
+    right: $modalClosePositionSp;
+  }
+  &:before,
+  &:after {
+    content: "";
+    width: 100%;
+    height: $modalCloseThickness;
+    background: $modalCloseColor;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  &:before {
+    transform: rotate(45deg);
+  }
+  &:after {
+    transform: rotate(-45deg);
+  }
+}
+
+.modal-bg {
+  background: $modalBgColor;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9998;
+  animation: showModal 0.4s 1 ease-out forwards;
+}
+
+.modal-arrow-prev,
+.modal-arrow-next {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  appearance: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  width: $modalArrowSize;
+  height: $modalArrowSize;
+  cursor: pointer;
+  z-index: 9998;
+  &:before {
+    content: "";
+    border-bottom: $modalCloseThickness solid $modalCloseColor;
+    width: 50%;
+    height: 50%;
+    display: block;
+    position: absolute;
+    top: 25%;
+  }
+}
+
+.modal-arrow-prev {
+  left: calc($modalArrowSize / 2);
+  &:before {
+    border-left: $modalCloseThickness solid $modalCloseColor;
+    transform: rotate(45deg);
+  }
+}
+
+.modal-arrow-next {
+  right: calc($modalArrowSize / 2);
+  &:before {
+    border-right: $modalCloseThickness solid $modalCloseColor;
+    transform: rotate(-45deg);
+  }
+}

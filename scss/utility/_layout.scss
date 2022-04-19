@@ -1,0 +1,378 @@
+@use "../global" as *;
+/* utility layout */
+
+// 上下のセクション
+
+.block-common {
+  margin-top: $sectionPadding;
+  margin-bottom: $sectionPadding;
+  @include mqS {
+    margin-top: $sectionPaddingSP;
+    margin-bottom: $sectionPaddingSP;
+  }
+}
+
+.block-large {
+  margin-top: calc($sectionPadding * 2);
+  margin-bottom: calc($sectionPadding * 2);
+  @include mqS {
+    margin-top: calc($sectionPaddingSP * 2);
+    margin-bottom: calc($sectionPaddingSP * 2);
+  }
+}
+
+.block-top {
+  margin-bottom: $sectionPadding;
+  @include mqS {
+    margin-bottom: $sectionPaddingSP;
+  }
+}
+
+.block-bottom {
+  margin-top: $sectionPadding;
+  @include mqS {
+    margin-top: $sectionPaddingSP;
+  }
+}
+
+// 左右のボックス幅
+
+.box-common {
+  max-width: $widthL;
+  margin-right: auto;
+  margin-left: auto;
+  box-sizing: content-box;
+  padding-right: 2%;
+  padding-left: 2%;
+  @include mqSM {
+    width: 100%;
+    padding-right: 4%;
+    padding-left: 4%;
+    box-sizing: border-box;
+  }
+  @include mqS {
+    max-width: 100%;
+    padding-right: 4%;
+    padding-left: 4%;
+    box-sizing: border-box;
+  }
+}
+
+.box-wider {
+  max-width: calc($widthL + 76px);
+  margin-right: auto;
+  margin-left: auto;
+  @include mqSM {
+    width: 100%;
+    padding-right: 6%;
+    padding-left: 6%;
+  }
+  @include mqS {
+    max-width: 100%;
+    padding-right: 8%;
+    padding-left: 8%;
+    box-sizing: border-box;
+  }
+}
+
+.box-wide {
+  max-width: $widthXL;
+  margin-right: auto;
+  margin-left: auto;
+  padding: 0 2%;
+  box-sizing: content-box;
+  @include mqS {
+    max-width: 100%;
+    padding: 0 2.6%;
+    box-sizing: border-box;
+  }
+}
+
+.box-narrow {
+  width: $widthM;
+  margin-right: auto;
+  margin-left: auto;
+  @include mqS {
+    max-width: 100%;
+    padding: 0 8%;
+    box-sizing: border-box;
+  }
+}
+
+.box-very-narrow {
+  width: $widthS;
+  margin-right: auto;
+  margin-left: auto;
+  @include mqS {
+    max-width: 100%;
+    padding: 0 8%;
+    box-sizing: border-box;
+  }
+}
+
+// display
+
+@include mqAll("d") {
+  &-b {
+    display: block;
+  }
+  &-ib {
+    display: inline-block;
+  }
+  &-if {
+    display: inline-flex;
+  }
+  &-i {
+    display: inline;
+  }
+  &-f {
+    display: flex;
+  }
+  &-n {
+    display: none;
+  }
+}
+
+// box-decoration-break
+
+.bdb-s {
+  box-decoration-break: slice;
+}
+.bdb-c {
+  box-decoration-break: clone;
+}
+
+// float
+
+@include mqAll("f") {
+  &-l {
+    float: left;
+  }
+  &-r {
+    float: right;
+  }
+  &-n {
+    float: none;
+  }
+}
+
+.clear {
+  clear: both;
+}
+
+// object fit
+
+@include mqAll("ofi") {
+  object-fit: cover;
+  object-position: center;
+  font-family: "object-fit: cover;";
+  width: 100%;
+  height: 100%;
+  &-n {
+    object-fit: none;
+  }
+}
+
+// overflow
+
+@include mqAll("of") {
+  &-a {
+    overflow: auto;
+  }
+  &-x-a {
+    overflow-x: auto;
+  }
+  &-y-a {
+    overflow-y: auto;
+  }
+  &-h {
+    overflow: hidden;
+  }
+  &-x-h {
+    overflow-x: hidden;
+  }
+  &-y-h {
+    overflow-y: hidden;
+  }
+  &-s {
+    overflow: scroll;
+  }
+  &-x-s {
+    overflow-x: scroll;
+  }
+  &-y-s {
+    overflow-y: scroll;
+  }
+}
+
+// overscroll behavior
+
+@include mqAll("osb") {
+  &-a {
+    overscroll-behavior: auto;
+  }
+  &-x-a {
+    overscroll-behavior-x: auto;
+  }
+  &-y-a {
+    overscroll-behavior-y: auto;
+  }
+  &-c {
+    overscroll-behavior: contain;
+  }
+  &-x-c {
+    overscroll-behavior-x: contain;
+  }
+  &-y-c {
+    overscroll-behavior-y: contain;
+  }
+  &-n {
+    overscroll-behavior: none;
+  }
+  &-x-n {
+    overscroll-behavior-x: none;
+  }
+  &-y-n {
+    overscroll-behavior-y: none;
+  }
+}
+
+// position
+
+@include mqAll("pos") {
+  &-s {
+    position: static;
+  }
+  &-f {
+    position: fixed;
+  }
+  &-a {
+    position: absolute;
+  }
+  &-r {
+    position: relative;
+  }
+  &-sticky {
+    position: sticky;
+  }
+  &-t {
+    &-0 {
+      top: 0%;
+    }
+    &-25 {
+      top: 25%;
+    }
+    &-50 {
+      top: 50%;
+    }
+    &-75 {
+      top: 75%;
+    }
+    &-100 {
+      top: 100%;
+    }
+  }
+  &-r {
+    &-0 {
+      right: 0%;
+    }
+    &-25 {
+      right: 25%;
+    }
+    &-50 {
+      right: 50%;
+    }
+    &-75 {
+      right: 75%;
+    }
+    &-100 {
+      right: 100%;
+    }
+  }
+  &-b {
+    &-0 {
+      bottom: 0%;
+    }
+    &-25 {
+      bottom: 25%;
+    }
+    &-50 {
+      bottom: 50%;
+    }
+    &-75 {
+      bottom: 75%;
+    }
+    &-100 {
+      bottom: 100%;
+    }
+  }
+  &-l {
+    &-0 {
+      left: 0%;
+    }
+    &-25 {
+      left: 25%;
+    }
+    &-50 {
+      left: 50%;
+    }
+    &-75 {
+      left: 75%;
+    }
+    &-100 {
+      left: 100%;
+    }
+  }
+  &-x-c {
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+  &-y-c {
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+  &-xy-c {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+  }
+}
+
+// z-index
+
+@include mqAll("zi") {
+  &-0 {
+    z-index: 0;
+  }
+  &-1 {
+    z-index: 1;
+  }
+  &-2 {
+    z-index: 2;
+  }
+  &-3 {
+    z-index: 3;
+  }
+  &-4 {
+    z-index: 4;
+  }
+  &-5 {
+    z-index: 5;
+  }
+  &-m1 {
+    z-index: -1;
+  }
+  &-limit {
+    z-index: 99999;
+  }
+  &-limit-m1 {
+    z-index: 99998;
+  }
+  &-limit-m2 {
+    z-index: 99997;
+  }
+}

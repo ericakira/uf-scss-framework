@@ -1,0 +1,108 @@
+@use "../global" as *;
+
+// flex
+@include mqAll("flex") {
+  display: flex;
+}
+@include mqAll("fw") {
+  &-w {
+    flex-wrap: wrap;
+  }
+  &-nw {
+    flex-wrap: nowrap;
+  }
+  &-wr {
+    flex-wrap: wrap-reverse;
+  }
+}
+@include mqAll("fd") {
+  &-r {
+    flex-direction: row;
+  }
+
+  &-rr {
+    flex-direction: row-reverse;
+  }
+
+  &-cr {
+    flex-direction: column-reverse;
+  }
+
+  &-c {
+    flex-direction: column;
+  }
+}
+@include mqAll("jc") {
+  &-c {
+    justify-content: center;
+  }
+
+  &-sb {
+    justify-content: space-between;
+  }
+
+  &-sa {
+    justify-content: space-around;
+  }
+
+  &-fe {
+    justify-content: flex-end;
+  }
+
+  &-fs {
+    justify-content: flex-start;
+  }
+}
+@include mqAll("ai") {
+  &-c {
+    align-items: center;
+  }
+
+  &-fe {
+    align-items: flex-end;
+  }
+
+  &-fs {
+    align-items: flex-start;
+  }
+}
+@include mqAll("as") {
+  &-fs {
+    align-self: flex-start;
+  }
+  &-c {
+    align-self: center;
+  }
+  &-fe {
+    align-self: flex-end;
+  }
+  &-st {
+    align-self: stretch;
+  }
+}
+@include mqAll("fs") {
+  &-1 {
+    flex-shrink: 1;
+  }
+
+  &-0 {
+    flex-shrink: 0;
+  }
+}
+@include mqAll("fg") {
+  &-1 {
+    flex-grow: 1;
+  }
+
+  &-0 {
+    flex-grow: 0;
+  }
+}
+
+@for $i from 0 through 20 {
+  @include mqAll("gap") {
+    &-#{$i} {
+      gap: #{$i} + "%";
+    }
+  }
+}

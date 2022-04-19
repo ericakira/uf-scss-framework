@@ -1,0 +1,29 @@
+@use '../global' as *;
+
+.ap-n {
+  appearance: none;
+}
+
+.cs-p {
+  cursor: pointer;
+}
+
+.cs-na {
+  cursor: not-allowed;
+}
+
+.o-n {
+  outline: 0;
+}
+
+.pe-n {
+  pointer-events: none;
+}
+
+.filter-i-0 {
+  filter: invert(0);
+}
+
+.filter-i-1 {
+  filter: invert(1);
+}

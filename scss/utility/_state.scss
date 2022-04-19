@@ -1,0 +1,85 @@
+@use "../global" as *;
+
+// color
+@include mqAll("bg") {
+  @each $key, $color in $colorList {
+    &-#{$key} {
+      background-color: $color;
+    }
+  }
+}
+
+@for $i from 0 through 10 {
+  $s: calc($i / 10);
+  .opacity-#{$i} {
+    opacity: #{$s};
+  }
+}
+
+// PC・SPのオンオフ
+
+.is-pc {
+  display: block !important;
+  @include mqS {
+    display: none !important;
+  }
+}
+.is-sp {
+  display: none !important;
+  @include mqS {
+    display: block !important;
+  }
+}
+
+.is-gnav-open {
+  overflow: hidden;
+  height: 100%;
+}
+
+// slick slideで高さを100%に
+
+.is-slider-fullheight {
+  height: 100%;
+  .slick-list {
+    height: 100%;
+    .slick-track {
+      height: 100%;
+      .slick-slide {
+        height: 100%;
+        > div {
+          height: 100%;
+        }
+        .slide-each {
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+@each $key, $hovColor in $colorList {
+  .hov-color-#{$key} {
+    @include hover {
+      color: $hovColor;
+    }
+  }
+  a.hov-color-#{$key} {
+    @include hover {
+      color: $hovColor;
+    }
+  }
+  .hov-bg-#{$key} {
+    @include hover {
+      background-color: $hovColor;
+    }
+  }
+  .hov-bd-color-#{$key} {
+    @include hover {
+      border-color: $hovColor;
+    }
+  }
+}
+
+.crs-p {
+  cursor: pointer;
+}

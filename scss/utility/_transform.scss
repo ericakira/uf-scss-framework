@@ -1,0 +1,79 @@
+@use '../global' as *;
+
+.tf-o-center {
+  transform-origin: center;
+}
+.tf-o-top {
+  transform-origin: top;
+}
+.tf-o-top-right {
+  transform-origin: top right;
+}
+.tf-o-right {
+  transform-origin: right;
+}
+.tf-o-bottom-right {
+  transform-origin: bottom right;
+}
+.tf-o-bottom {
+  transform-origin: bottom;
+}
+.tf-o-bottom-left {
+  transform-origin: bottom left;
+}
+.tf-o-left {
+  transform-origin: left;
+}
+.tf-o-top-left {
+  transform-origin: top left;
+}
+
+// rotate
+
+@for $i from 0 through 24 {
+  .tf-r-#{$i * 15} {
+    transform: rotate(5deg * $i);
+  }
+}
+
+// translate
+
+.tf-ty-m10 {
+  transform: translateY(-10%);
+}
+
+.tf-ty-m20 {
+  transform: translateY(-20%);
+}
+
+.tf-ty-m30 {
+  transform: translateY(-30%);
+}
+
+.tf-ty-m40 {
+  transform: translateY(-40%);
+}
+
+.tf-ty-m50 {
+  transform: translateY(-50%);
+}
+
+.tf-ty-10 {
+  transform: translateY(10%);
+}
+
+.tf-ty-20 {
+  transform: translateY(20%);
+}
+
+.tf-ty-30 {
+  transform: translateY(30%);
+}
+
+.tf-ty-40 {
+  transform: translateY(40%);
+}
+
+.tf-ty-50 {
+  transform: translateY(50%);
+}
