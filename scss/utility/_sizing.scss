@@ -3,34 +3,25 @@
 // width汎用class(settings.scssでON/OFF設定)
 // width&height
 @if $widthClass {
-  @for $i from 0 through 100 {
-    .w-#{$i} {
-      width: percentage(calc($i / 100));
-      &vw {
-        width: #{$i}vw;
-      }
-    }
-    .h-#{$i} {
-      height: percentage(calc($i / 100));
-      &vw {
-        height: #{$i}vw;
-      }
-    }
-  }
-  @for $i from 0 through 100 {
-    @include mqS {
-      .sp-w-#{$i} {
+  @include mqAll("w") {
+    @for $i from 0 through 100 {
+      &-#{$i} {
         width: percentage(calc($i / 100));
         &vw {
           width: #{$i}vw;
         }
       }
     }
-    @include mqS {
-      .sp-h-#{$i} {
+  }
+  @include mqAll("h") {
+    @for $i from 0 through 100 {
+      &-#{$i} {
         height: percentage(calc($i / 100));
         &vw {
           height: #{$i}vw;
+        }
+        &vh {
+          height: #{$i}vh;
         }
       }
     }
