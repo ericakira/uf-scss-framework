@@ -99,8 +99,8 @@
   }
 }
 
-@for $i from 0 through 20 {
-  @include mqAll("gap") {
+@include mqAll("gap") {
+  @for $i from 0 through 20 {
     &-#{$i} {
       gap: #{$i} + "%";
     }
