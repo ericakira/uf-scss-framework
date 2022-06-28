@@ -1,4 +1,4 @@
-@use '../global' as *;
+@use "../global" as *;
 
 // border-width
 
@@ -8,7 +8,7 @@
 }
 
 @for $i from 0 through 10 {
-  @include mqAll('bd') {
+  @include mqAll("bd") {
     &-#{$i} {
       border-width: #{$i}px;
       @include borderDefault;
@@ -16,8 +16,8 @@
   }
 }
 
-@for $i from 0 through 10 {
-  @include mqAll('bd') {
+@include mqAll("bd") {
+  @for $i from 0 through 10 {
     &-b-w-#{$i} {
       border-bottom-width: #{$i}px;
       @include borderDefault;
@@ -43,7 +43,7 @@
 
 // border-color
 @each $key, $color in $colorList {
-  @include mqAll('bd') {
+  @include mqAll("bd") {
     &-c-#{$key} {
       border-color: $color;
     }
@@ -81,7 +81,7 @@
 
 // border-radius
 @each $key, $bdradius in $borderRadiusList {
-  @include mqAll('bd') {
+  @include mqAll("bd") {
     &-rd-#{$key} {
       border-radius: $bdradius;
     }
