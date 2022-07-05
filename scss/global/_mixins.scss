@@ -17,7 +17,7 @@
 
 @mixin mqM {
   // 768px以上の場合
-  @media (min-width: s.$breakpointM) {
+  @media (min-width: s.$breakpointS) {
     @content;
   }
 }
@@ -47,6 +47,14 @@
       }
     }
   }
+}
+
+// .box-〜用
+@mixin boxSetting($maxw: s.$widthL, $bs: border-box, $pd: 4%) {
+  max-width: $maxw;
+  box-sizing: $bs;
+  padding-left: $pd;
+  padding-right: $pd;
 }
 
 // 右向き矢印
@@ -192,9 +200,10 @@
 @mixin hover {
   @media (hover: none) {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    &:active {
-      @content;
-    }
+    // スマホ時にもhoverスタイルを当てたかったらここのコメントアウトを解除
+    // &:active {
+    //   @content;
+    // }
   }
   @media (-ms-high-contrast: none),
     (-ms-high-contrast: active),
@@ -205,8 +214,23 @@
     }
   }
 }
-
+// マーカー下線
 @mixin marker {
   background: rgba(0, 0, 0, 0) linear-gradient(transparent 60%, #fff7bc 0%)
     repeat scroll 0 0;
+}
+// グラデーション背景
+@mixin gradient(
+  $colorStart: map-get(s.$colorList, primary),
+  $colorEnd: map-get(s.$colorList, secondary),
+  $deg: 180deg,
+  $opacityStart: 1,
+  $opacityEnd: 1
+) {
+  background: linear-gradient(
+    $deg,
+    rgba($colorStart, $opacityStart) 0%,
+    rgba($colorEnd, $opacityEnd) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=#{$colorStart}, endColorstr=#{$colorEnd},GradientType=1 );
 }

@@ -16,8 +16,8 @@
   }
 }
 
-@include mqAll("bd") {
-  @for $i from 0 through 10 {
+@for $i from 0 through 10 {
+  @include mqAll("bd") {
     &-b-w-#{$i} {
       border-bottom-width: #{$i}px;
       @include borderDefault;

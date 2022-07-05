@@ -6,6 +6,127 @@ component style
 
 ----------------------------- */
 
+// 上下のセクション
+
+.block-common {
+  margin-top: $sectionPadding;
+  margin-bottom: $sectionPadding;
+  @include mqS {
+    margin-top: $sectionPaddingSP;
+    margin-bottom: $sectionPaddingSP;
+  }
+}
+
+.block-large {
+  margin-top: calc($sectionPadding * 2);
+  margin-bottom: calc($sectionPadding * 2);
+  @include mqS {
+    margin-top: calc($sectionPaddingSP * 2);
+    margin-bottom: calc($sectionPaddingSP * 2);
+  }
+}
+
+.block-narrow {
+  margin-top: calc($sectionPadding / 2);
+  margin-bottom: calc($sectionPadding / 2);
+  @include mqS {
+    margin-top: calc($sectionPaddingSP / 2);
+    margin-bottom: calc($sectionPaddingSP / 2);
+  }
+}
+
+.block-top {
+  margin-bottom: $sectionPadding;
+  @include mqS {
+    margin-bottom: $sectionPaddingSP;
+  }
+}
+
+.block-top-large {
+  margin-bottom: calc($sectionPadding * 2);
+  @include mqS {
+    margin-bottom: calc($sectionPaddingSP * 2);
+  }
+}
+
+.block-top-narrow {
+  margin-bottom: calc($sectionPadding / 2);
+  @include mqS {
+    margin-bottom: calc($sectionPaddingSP / 2);
+  }
+}
+
+.block-bottom {
+  margin-top: $sectionPadding;
+  @include mqS {
+    margin-top: $sectionPaddingSP;
+  }
+}
+
+.block-bottom-large {
+  margin-top: calc($sectionPadding * 2);
+  @include mqS {
+    margin-top: calc($sectionPaddingSP * 2);
+  }
+}
+
+.block-bottom-narrow {
+  margin-top: calc($sectionPadding / 2);
+  @include mqS {
+    margin-top: calc($sectionPaddingSP / 2);
+  }
+}
+
+// 左右のボックス幅
+
+.box-common {
+  @include boxSetting($widthL, content-box, 2%);
+  margin-right: auto;
+  margin-left: auto;
+  @include mqSM {
+    @include boxSetting(100%, border-box, 4%);
+  }
+  @include mqS {
+    @include boxSetting(100%, border-box, 4%);
+  }
+}
+
+.box-wide {
+  @include boxSetting($widthXL, content-box, 2%);
+  margin-right: auto;
+  margin-left: auto;
+  @include mqSM {
+    @include boxSetting(100%, border-box, 4%);
+  }
+  @include mqS {
+    @include boxSetting(100%, border-box, 4%);
+  }
+}
+
+.box-medium {
+  @include boxSetting($widthM, border-box, 0%);
+  margin-right: auto;
+  margin-left: auto;
+  @include mqSM {
+    @include boxSetting(100%, border-box, 4%);
+  }
+  @include mqS {
+    @include boxSetting(100%, border-box, 4%);
+  }
+}
+
+.box-short {
+  @include boxSetting($widthS, border-box, 0%);
+  margin-right: auto;
+  margin-left: auto;
+  @include mqSM {
+    @include boxSetting(100%, border-box, 4%);
+  }
+  @include mqS {
+    @include boxSetting(100%, border-box, 4%);
+  }
+}
+
 // hover時の挙動
 
 .hov-ptn01 {

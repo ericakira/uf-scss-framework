@@ -66,30 +66,12 @@
   }
 }
 
-/* margin-left margin-right px用汎用class */
-
-@include mqAll("mr") {
-  @each $key, $space in $spacesList {
-    &-#{$key} {
-      margin-right: $space;
-    }
-  }
-}
-
-@include mqAll("ml") {
-  @each $key, $space in $spacesList {
-    &-#{$key} {
-      margin-left: $space;
-    }
-  }
-}
-
 /* margin-left margin-right %用汎用class */
 
 @include mqAll("mr") {
-  @for $i from 0 through 20 {
+  @for $i from 0 through 21 {
     &-#{$i}p {
-      margin-right: percentage($i / 100);
+      margin-right: percentage(calc($i / 100));
     }
   }
 }
@@ -97,7 +79,7 @@
 @include mqAll("ml") {
   @for $i from 0 through 20 {
     &-#{$i}p {
-      margin-left: percentage($i / 100);
+      margin-left: percentage(calc($i / 100));
     }
   }
 }
@@ -116,6 +98,60 @@
   @for $i from 0 through 20 {
     &-#{$i}vw {
       margin-left: $i + vw;
+    }
+  }
+}
+
+/* margin-left margin-right px用汎用class */
+
+@include mqAll("mr") {
+  @each $key, $space in $spacesList {
+    &-#{$key} {
+      margin-right: $space;
+    }
+  }
+}
+
+@include mqAll("ml") {
+  @each $key, $space in $spacesList {
+    &-#{$key} {
+      margin-left: $space;
+    }
+  }
+}
+
+/* padding-left padding-right %汎用class */
+
+@include mqAll("pr") {
+  @for $i from 0 through 20 {
+    &-#{$i}p {
+      padding-right: percentage(calc($i / 100));
+    }
+  }
+}
+
+@include mqAll("pl") {
+  @for $i from 0 through 20 {
+    &-#{$i}p {
+      padding-left: percentage(calc($i / 100));
+    }
+  }
+}
+
+/* padding-left padding-right vw汎用class */
+
+@include mqAll("pr") {
+  @for $i from 0 through 20 {
+    &-#{$i}vw {
+      padding-right: $i + vw;
+    }
+  }
+}
+
+@include mqAll("pl") {
+  @for $i from 0 through 20 {
+    &-#{$i}vw {
+      padding-left: $i + vw;
     }
   }
 }
@@ -156,42 +192,6 @@
   }
 }
 
-/* padding-left padding-right %汎用class */
-
-@include mqAll("pr") {
-  @for $i from 0 through 20 {
-    &-#{$i}p {
-      padding-right: percentage($i / 100);
-    }
-  }
-}
-
-@include mqAll("pl") {
-  @for $i from 0 through 20 {
-    &-#{$i}p {
-      padding-left: percentage($i / 100);
-    }
-  }
-}
-
-/* padding-left padding-right vw汎用class */
-
-@include mqAll("pr") {
-  @for $i from 0 through 20 {
-    &-#{$i}vw {
-      padding-right: $i + vw;
-    }
-  }
-}
-
-@include mqAll("pl") {
-  @for $i from 0 through 20 {
-    &-#{$i}vw {
-      padding-left: $i + vw;
-    }
-  }
-}
-
 // padding汎用class(settings.scssでON/OFF設定)
 /* padding汎用class */
 
@@ -199,7 +199,7 @@
   @if $paddingClass {
     @for $i from 0 through 10 {
       &-#{$i} {
-        padding: percentage($i / 100);
+        padding: percentage(calc($i / 100));
       }
     }
   }
