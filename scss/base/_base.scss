@@ -15,8 +15,8 @@ html {
 
 body {
   font-family: $primaryFont;
-  font-weight: $primaryFontWeight;
-  font-size: map-get($fontSizeList, "sm") + rem;
+  font-weight: map-get($fontWeightList, primary);
+  font-size: font-clamp(map-get($fontSizeList, "sm"));
   line-height: 1.7;
   font-feature-settings: "palt";
   letter-spacing: 0.1em;
@@ -81,11 +81,11 @@ main {
     min-height: 100vh;
   }
   @if $headerOverWrap == true {
-    padding-top: 0;
-  } @else {
     padding-top: $headerHeight;
     @include mqS {
       padding-top: $headerHeightSP;
     }
+  } @else {
+    padding-top: 0;
   }
 }

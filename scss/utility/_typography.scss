@@ -1,8 +1,15 @@
 @use "../global" as *;
 
 // font-family
-.font-secondary {
-  @include font();
+@each $key, $font in $fontFamilyList {
+  .font-#{$key} {
+    font-family: $font;
+    @each $key2, $weight in $fontWeightList {
+      @if $key == $key2 {
+        font-weight: $weight;
+      }
+    }
+  }
 }
 
 // color
