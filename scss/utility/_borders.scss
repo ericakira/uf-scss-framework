@@ -7,8 +7,8 @@
   border-color: inherit;
 }
 
-@for $i from 0 through 10 {
-  @include mqAll("bd") {
+@include mqAll("bd") {
+  @for $i from 0 through 10 {
     &-#{$i} {
       border-width: #{$i}px;
       @include borderDefault;
@@ -16,8 +16,8 @@
   }
 }
 
-@for $i from 0 through 10 {
-  @include mqAll("bd") {
+@include mqAll("bd") {
+  @for $i from 0 through 10 {
     &-b-w-#{$i} {
       border-bottom-width: #{$i}px;
       @include borderDefault;
@@ -80,8 +80,8 @@
 }
 
 // border-radius
-@each $key, $bdradius in $borderRadiusList {
-  @include mqAll("bd") {
+@include mqAll("bd") {
+  @each $key, $bdradius in $borderRadiusList {
     &-rd-#{$key} {
       border-radius: $bdradius;
     }
