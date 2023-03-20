@@ -1,10 +1,6 @@
 @use "../global" as *;
 
-/* -----------------------------
-
-animation keyframes
-
------------------------------ */
+/* utilities: animation keyframes */
 
 @include keyframes(show) {
   0% {

@@ -1,37 +1,63 @@
 @use "../global" as *;
 
-// width汎用class(settings.scssでON/OFF設定)
-// width&height
-@if $widthClass {
-  @include mqAll("w") {
-    @for $i from 0 through 100 {
-      &-#{$i} {
-        width: percentage(calc($i / 100));
-        &vw {
-          width: #{$i}vw;
-        }
-      }
-    }
-  }
-  @include mqAll("h") {
-    @for $i from 0 through 100 {
-      &-#{$i} {
-        height: percentage(calc($i / 100));
-        &vw {
-          height: #{$i}vw;
-        }
-        &vh {
-          height: #{$i}vh;
-        }
-      }
-    }
-  }
-}
+/* utilities: sizing */
 
-@include mqAll("max-h-100") {
-  max-height: 100%;
-}
+$sizingIncrements: (
+  (
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: "%",
+  ),
+  (
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: vw,
+    suffix: vw,
+  ),
+  (
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: vh,
+    suffix: vh,
+  )
+);
+$sizingValues: (
+  maxc: max-content,
+  minc: min-content,
+  fc: fit-content,
+);
 
-@include mqAll("max-w-100") {
-  max-width: 100%;
-}
+$utilities: (
+  sizing: (
+    w: (
+      property: width,
+      increment: $sizingIncrements,
+      values: $sizingValues,
+    ),
+    h: (
+      property: height,
+      increment: $sizingIncrements,
+      values: $sizingValues,
+    ),
+    max-w: (
+      property: max-width,
+      increment: $sizingIncrements,
+    ),
+    max-h: (
+      property: max-height,
+      increment: $sizingIncrements,
+    ),
+    min-w: (
+      property: min-width,
+      increment: $sizingIncrements,
+    ),
+    min-h: (
+      property: min-height,
+      increment: $sizingIncrements,
+    ),
+  ),
+);
+@include utilityMap($utilities, "sizing");

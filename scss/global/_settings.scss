@@ -1,40 +1,55 @@
-// framework version 1.1.0
+/* -----------------------------------
+uf scss framework version 2.0.0
+----------------------------------- */
 
-// media queryのbreakpoint値
-$breakpointS: 600px;
-$breakpointM: 1025px;
-$breakpointL: 1400px;
+// デザインカンプのキャンバスサイズ
+// px値を入れておけばvwに変換される
+$canvasSize: (
+  pc: 1400px,
+  sp: calc(750px / 2),
+);
 
-$bpClass: (
-  "sp": "(max-width: #{$breakpointS - 1})",
-  "tb": "(min-width: #{$breakpointS}) and (max-width: #{$breakpointM - 1})",
-) !default;
+// メディアクエリのbreakpoint値(キーがmqミックスインの引数になる)
+$breakpoints: (
+  s: 600px,
+  m: 1025px,
+  l: 1441px,
+);
 
-// ボックス幅(max-width)
-$widthS: 700px;
-$widthM: 920px;
-$widthL: 1220px;
-$widthXL: 1300px;
+// utility出力で利用するbreakpointクラス用
+// キーがメディアクエリ用クラスのプレフィクスになる
+// 値は上記$breakpointsで設定したものを利用する
+// 値を1文字のstringにすればmax-width、配列形式で2要素を入れるとmin-width,max-widthに変換される
+$breakpointsClass: (
+  sp: s,
+  tb: (
+    s,
+    m,
+  ),
+);
 
 // ヘッダーの高さ(PC,SP)
-$headerHeight: 90px;
-$headerHeightSP: 50px;
+$headerHeight: (
+  pc: 130px,
+  sp: 100px,
+);
 
-// セクション間のスペース(PC,SP)
-$sectionPadding: 200px;
-$sectionPaddingSP: 50px;
+// ヘッダー固定(position:fixedさせるかどうか)
+$fixedHeader: false;
+// ヘッダー固定時にmainにpadding-topを入れるかどうか
+$headerOverWrap: true;
 
 // margin,paddingの汎用サイズ
 $spacesList: (
-  none: 0px,
-  xs: 10px,
-  s: 20px,
-  sm: 30px,
-  m: 40px,
-  ml: 60px,
-  l: 80px,
-  xl: 100px,
-  xl2: 150px,
+  none: 0rem,
+  xs: 0.5rem,
+  s: 1rem,
+  sm: 2.5rem,
+  m: 4rem,
+  ml: 6rem,
+  l: 8rem,
+  xl: 10rem,
+  xl2: 15rem,
 );
 
 // フォントサイズ
@@ -45,9 +60,9 @@ $fontSizeList: (
   m: 1.6,
   ml: 1.8,
   l: 2,
-  xl: 2.4,
-  xl2: 2.8,
-  xl3: 3.6,
+  xl: 2.2,
+  xl2: 2.6,
+  xl3: 3,
   xl4: 4,
   xl5: 5,
   xl6: 6,
@@ -77,74 +92,94 @@ $lineHeightList: (
 
 // border-radius
 $borderRadiusList: (
-  s: 3px,
-  m: 6px,
-  l: 10px,
-  xl: 1000px,
+  s: 0.3rem,
+  m: 0.6rem,
+  ml: 2rem,
+  l: 3rem,
+  xl: 5rem,
+  xl2: 100rem,
 );
 
 // bodyにかかる基本色
-$baseColor: #222;
+$baseColor: #222222;
 $baseBg: #ffffff;
 
 // 色
 $colorList: (
-  "primary": #c0b59f,
-  "secondary": #dad2bf,
-  "accent": #69b9bb,
-  "caution": #4fb430,
+  "primary": #153940,
+  "secondary": #f5f4f3,
+  "accent": #ffeb00,
+  "caution": #8f8f8f,
   "white": #fff,
   "black": $baseColor,
   "grey": #e5e5e5,
-  "add1": #faf8f3,
-  "add2": #c0b59f,
-  "add3": #fffbf4,
-  "add4": #fff9ee,
-  "add5": #b3a68c,
-  "add6": #f5f1e9,
+  "add1": #f7f5f3,
   "transparent": transparent,
 );
 
 // ::selectionカラー（テキスト選択時の色）
-$selectionBg: #{rgba(105, 185, 187, 0.7)};
+$selectionBg: #{rgba(#153940, 0.7)};
 $selectionColor: #fff;
 
-// 基本フォント
-$primaryFont: "Noto Sans JP", YuGothic, "Yu Gothic Medium", "Yu Gothic",
-  "游ゴシック体", "游ゴシック", -apple-system, BlinkMacSystemFont, Roboto,
-  "Segoe UI", "Helvetica Neue", HelveticaNeue, Verdana, Meiryo, sans-serif;
-$secondaryFont: "Lato", sans-serif;
-$accentFont: "Noto Serif JP", serif;
-$cautionFont: Varela, sans-serif;
-
 // font-family
-$fontFamilyList: (
-  primary: $primaryFont,
-  secondary: $secondaryFont,
-  accent: $accentFont,
-  caution: $cautionFont,
+$fontList: (
+  primary: (
+    ("Noto Sans JP", sans-serif),
+    600,
+  ),
+  secondary: (
+    ("Lato", sans-serif),
+    600,
+  ),
+  accent: (
+    ("Noto Serif JP", serif),
+    400,
+  ),
+  caution: (
+    serif,
+    400,
+  ),
 );
-// font-family初期値のfont-weigth
-$fontWeightList: (
-  primary: 400,
-  secondary: 300,
-  accent: 400,
-  caution: 400,
+
+$blockStyling: (
+  spaceAmount: (
+    default: map-get($spacesList, xl),
+    sm: map-get($spacesList, l),
+    s: map-get($spacesList, m),
+  ),
+  blockClasses: (
+    common: (
+      margin-top,
+      margin-bottom,
+    ),
+    top: (
+      margin-bottom,
+    ),
+    bottom: (
+      margin-top,
+    ),
+  ),
+  blockSizes: (
+    large: 2,
+    small: 0.5,
+  ),
 );
 
-// ヘッダー固定(position:fixedさせるかどうか)
-$fixedHeader: true;
-// ヘッダー固定時にmainにpadding-topを入れるかどうか
-$headerOverWrap: true;
-
-// margin,paddingの細かい汎用classを生成するかどうかの設定（別途xs〜xlまでのclassはあるので基本的に不要かも）
-// endValueは5の倍数でいくつ出すか（例：20なら.mb100まで作られる）
-// 不要なら$spaceClassをfalseに、paddingだけ不要なら$spacePaddingをfalseに指定
-$spaceClass: false !default;
-$spacePadding: false !default;
-$endValue: 20 !default;
-// 上下左右padding用
-$paddingClass: true !default;
-
-// widthの汎用classを生成するかどうかの設定（.w1〜.w100まで）
-$widthClass: true !default;
+$boxStyling: (
+  common: (
+    1000px,
+    calc(700px / 2),
+  ),
+  wide: (
+    1200px,
+    calc(740px / 2),
+  ),
+  medium: (
+    800px,
+    calc(680px / 2),
+  ),
+  narrow: (
+    600px,
+    calc(500px / 2),
+  ),
+);

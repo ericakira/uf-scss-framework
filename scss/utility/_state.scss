@@ -1,85 +1,93 @@
 @use "../global" as *;
 
-// color
-@include mqAll("bg") {
-  @each $key, $color in $colorList {
-    &-#{$key} {
-      background-color: $color;
-    }
-  }
-}
+/* utilities: state */
 
-@for $i from 0 through 10 {
-  $s: calc($i / 10);
-  .opacity-#{$i} {
-    opacity: #{$s};
-  }
-}
+$utilities: (
+  state: (
+    is: (
+      property: display,
+      values: (
+        sp: none#{"!"},
+        sp-tb: none#{"!"},
+        tb: none#{"!"},
+        tb-pc: block#{"!"},
+        pc: block#{"!"},
+      ),
+      responsive: (
+        sp: (
+          values: (
+            sp: block#{"!"},
+            sp-tb: block#{"!"},
+            tb: none#{"!"},
+            tb-pc: none#{"!"},
+            pc: none#{"!"},
+          ),
+        ),
+        tb: (
+          values: (
+            sp: none#{"!"},
+            sp-tb: block#{"!"},
+            tb: block#{"!"},
+            tb-pc: block#{"!"},
+            pc: none#{"!"},
+          ),
+        ),
+      ),
+    ),
+    bg: (
+      property: background-color,
+      values: $colorList,
+    ),
+    o: (
+      property: opacity,
+      increment: (
+        min: 0,
+        max: 10,
+        step: 0.1,
+      ),
+    ),
+    cs: (
+      property: cursor,
+      responsive: false,
+      values: (
+        a: auto,
+        d: default,
+        h: help,
+        p: pointer,
+        t: text,
+        vt: vertical-text,
+        na: not-allowed,
+      ),
+    ),
+    hov-color: (
+      property: color,
+      hover: true,
+      responsive: false,
+      values: $colorList,
+    ),
+    hov-bg: (
+      property: background-color,
+      hover: true,
+      responsive: false,
+      values: $colorList,
+    ),
+    hov-bd-color: (
+      property: border-color,
+      hover: true,
+      responsive: false,
+      values: $colorList,
+    ),
+    hov-o: (
+      property: opacity,
+      hover: true,
+      responsive: false,
+      increment: (
+        min: 0,
+        max: 10,
+        step: 0.1,
+      ),
+    ),
+  ),
+);
 
-// PC・SPのオンオフ
-
-.is-pc {
-  display: block !important;
-  @include mqS {
-    display: none !important;
-  }
-}
-.is-sp {
-  display: none !important;
-  @include mqS {
-    display: block !important;
-  }
-}
-
-.is-gnav-open {
-  overflow: hidden;
-  height: 100%;
-}
-
-// slick slideで高さを100%に
-
-.is-slider-fullheight {
-  height: 100%;
-  .slick-list {
-    height: 100%;
-    .slick-track {
-      height: 100%;
-      .slick-slide {
-        height: 100%;
-        > div {
-          height: 100%;
-        }
-        .slide-each {
-          height: 100%;
-        }
-      }
-    }
-  }
-}
-
-@each $key, $hovColor in $colorList {
-  .hov-color-#{$key} {
-    @include hover {
-      color: $hovColor;
-    }
-  }
-  a.hov-color-#{$key} {
-    @include hover {
-      color: $hovColor;
-    }
-  }
-  .hov-bg-#{$key} {
-    @include hover {
-      background-color: $hovColor;
-    }
-  }
-  .hov-bd-color-#{$key} {
-    @include hover {
-      border-color: $hovColor;
-    }
-  }
-}
-
-.crs-p {
-  cursor: pointer;
-}
+@include utilityMap($utilities, "state");

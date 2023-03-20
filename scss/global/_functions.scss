@@ -1,16 +1,21 @@
 @use "settings" as s;
 
 //PC用 font-sizeを最大値rem＋基準値vwでclamp関数により出力
-@function font-clamp($maxFont) {
-  $fontVw: calc($maxFont/1.44);
+@function font-clamp($maxFont: 1) {
+  $fontVw: round-decimal(calc($maxFont/1.44), 3);
   $maxFontSize: $maxFont * 1rem;
-  @return clamp(1rem, 1rem + #{$fontVw}vw, #{$maxFontSize});
+  @return clamp(10px, 1rem + #{$fontVw}vw, #{$maxFontSize});
+}
+
+// pxをremに変換する
+@function px-rem($size) {
+  @return (calc($size * 1rem / 10px));
 }
 
 // remをvwに変換する
 // 第一引数：変換させたいrem値(1rem),第二引数(オプション)：breakpoint値(1025px)
 // 例；font-size: rem-vw(1.6rem,1024px);
-@function rem-vw($remValue: 1rem, $remBreakpoint: s.$breakpointM) {
+@function rem-vw($remValue: 1rem, $remBreakpoint: map-get(s.$breakpoints, l)) {
   $remVal: calc(($remValue * 10) / 1rem);
   @return (calc($remVal / ($remBreakpoint / 1px)) * 100) + vw;
 }
@@ -18,8 +23,8 @@
 // pxをvwに変換する
 // 第一引数：変換させたいpx値(10px),第二引数(オプション)：breakpoint値(1025px)
 // 例；font-size: px-vw(16px,1024px);
-@function px-vw($pxValue: 10px, $pxBreakpoint: s.$breakpointM) {
-  @return (calc($pxValue / $pxBreakpoint) * 100) + vw;
+@function px-vw($pxValue: 10px, $pxBreakpoint: map-get(s.$breakpoints, l)) {
+  @return (round-decimal(calc($pxValue / $pxBreakpoint) * 100)) + vw;
 }
 
 // settingsで設定されているカラーを取得する
@@ -32,4 +37,78 @@
 // 例；font-size: fontSize(xs);
 @function fontSize($fz) {
   @return map-get(s.$fontSizeList, $fz);
+}
+
+// 文字列の置換
+// 第一引数
+// 必須	 	置換前の文字列。
+// 第二引数
+// 必須	 	置換後の文字列。
+// 第三引数
+// 必須	 	元となる文字列。
+// 第四引数	false	すべて置換するかどうか。
+// falseの場合は最初に見つかった1つのみを置換する。
+// 戻り値	 	置換された文字列。
+@function strReplace($substr, $newsubstr, $str, $all: false) {
+  $pos: str-index($str, $substr);
+
+  @while $pos != null {
+    $strlen: str-length($substr);
+    $start: str-slice($str, 0, $pos - 1);
+    $end: str-slice($str, $pos + $strlen);
+    $str: $start + $newsubstr + $end;
+
+    @if $all == true {
+      $pos: str-index($str, $substr);
+    } @else {
+      $pos: null;
+    }
+  }
+  @return $str;
+}
+
+// Round (四捨五入)
+@function round-decimal($number, $digits: 0) {
+  @return to-fixed($number, $digits, "round");
+}
+
+// Ceil (切り上げ)
+@function ceil-decimal($number, $digits: 0) {
+  @return to-fixed($number, $digits, "ceil");
+}
+
+// Floor (切り捨て)
+@function floor-decimal($number, $digits: 0) {
+  @return to-fixed($number, $digits, "floor");
+}
+
+// 上記３つの関数で使う処理
+@function to-fixed($number, $digits: 0, $round: "round") {
+  $n: 1;
+  // $number must be a number
+  @if type-of($number) != number {
+    @warn '#{ $number } is not a number.';
+    @return $number;
+  }
+  // $digits must be a unitless number
+  @if type-of($digits) != number {
+    @warn '#{ $digits } is not a number.';
+    @return $number;
+  } @else if not unitless($digits) {
+    @warn '#{ $digits } has a unit.';
+    @return $number;
+  }
+  @for $i from 1 through $digits {
+    $n: $n * 10;
+  }
+  @if $round == "round" {
+    @return round($number * $n) / $n;
+  } @else if $round == "ceil" {
+    @return ceil($number * $n) / $n;
+  } @else if $round == "floor" {
+    @return floor($number * $n) / $n;
+  } @else {
+    @warn '#{ $round } is undefined keyword.';
+    @return $number;
+  }
 }

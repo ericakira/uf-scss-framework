@@ -1,89 +1,117 @@
 @use "../global" as *;
 
-// border-width
+/* utilities: borders */
 
-@mixin borderDefault() {
-  border-style: solid;
-  border-color: inherit;
-}
+$borderIncrements: (
+  min: 0,
+  max: 10,
+  step: 1,
+  unit: px,
+  properties: (
+    solid,
+    inherit,
+  ),
+);
 
-@include mqAll("bd") {
-  @for $i from 0 through 10 {
-    &-#{$i} {
-      border-width: #{$i}px;
-      @include borderDefault;
-    }
-  }
-}
+$utilities: (
+  borders: (
+    bd: (
+      property: (
+        border-width,
+        border-style,
+        border-color,
+      ),
+      increment: $borderIncrements,
+    ),
+    bd-t: (
+      property: (
+        border-top-width,
+        border-style,
+        border-color,
+      ),
+      increment: $borderIncrements,
+    ),
+    bd-r: (
+      property: (
+        border-right-width,
+        border-style,
+        border-color,
+      ),
+      increment: $borderIncrements,
+    ),
+    bd-b: (
+      property: (
+        border-bottom-width,
+        border-style,
+        border-color,
+      ),
+      increment: $borderIncrements,
+    ),
+    bd-l: (
+      property: (
+        border-left-width,
+        border-style,
+        border-color,
+      ),
+      increment: $borderIncrements,
+    ),
+    bd-w: (
+      property: border-width,
+      increment: map-remove($borderIncrements, properties),
+    ),
+    bd-t-w: (
+      property: border-top-width,
+      increment: map-remove($borderIncrements, properties),
+    ),
+    bd-r-w: (
+      property: border-right-width,
+      increment: map-remove($borderIncrements, properties),
+    ),
+    bd-b-w: (
+      property: border-bottom-width,
+      increment: map-remove($borderIncrements, properties),
+    ),
+    bd-l-w: (
+      property: border-left-width,
+      increment: map-remove($borderIncrements, properties),
+    ),
+    bd-c: (
+      property: border-color,
+      values: $colorList,
+    ),
+    bd-s: (
+      property: border-style,
+      values: (
+        solid: solid,
+        dashed: dashed,
+        dotted: dotted,
+        double: double,
+        groove: groove,
+        ridge: ridge,
+        none: none,
+      ),
+    ),
+    bd-rd: (
+      property: border-radius,
+      values: $borderRadiusList,
+    ),
+    bd-tl-rd: (
+      property: border-top-left-radius,
+      values: $borderRadiusList,
+    ),
+    bd-tr-rd: (
+      property: border-top-right-radius,
+      values: $borderRadiusList,
+    ),
+    bd-br-rd: (
+      property: border-bottom-right-radius,
+      values: $borderRadiusList,
+    ),
+    bd-bl-rd: (
+      property: border-bottom-left-radius,
+      values: $borderRadiusList,
+    ),
+  ),
+);
 
-@include mqAll("bd") {
-  @for $i from 0 through 10 {
-    &-b-w-#{$i} {
-      border-bottom-width: #{$i}px;
-      @include borderDefault;
-    }
-    &-t-w-#{$i} {
-      border-top-width: #{$i}px;
-      @include borderDefault;
-    }
-    &-l-w-#{$i} {
-      border-left-width: #{$i}px;
-      @include borderDefault;
-    }
-    &-r-w-#{$i} {
-      border-right-width: #{$i}px;
-      @include borderDefault;
-    }
-    &-w-#{$i} {
-      border-width: #{$i}px;
-      @include borderDefault;
-    }
-  }
-}
-
-// border-color
-@each $key, $color in $colorList {
-  @include mqAll("bd") {
-    &-c-#{$key} {
-      border-color: $color;
-    }
-  }
-}
-
-// border-style
-.bd-s-solid {
-  border-style: solid;
-}
-
-.bd-s-dashed {
-  border-style: dashed;
-}
-
-.bd-s-dotted {
-  border-style: dotted;
-}
-
-.bd-s-double {
-  border-style: double;
-}
-
-.bd-s-groove {
-  border-style: groove;
-}
-
-.bd-s-ridge {
-  border-style: ridge;
-}
-
-.bd-s-none {
-  border-style: none;
-}
-
-// border-radius
-@include mqAll("bd") {
-  @each $key, $bdradius in $borderRadiusList {
-    &-rd-#{$key} {
-      border-radius: $bdradius;
-    }
-  }
-}
+@include utilityMap($utilities, "borders");

@@ -7,16 +7,18 @@ base style
 ----------------------------- */
 
 html {
-  font-size: 62.5%;
-  // @include mqS {
-  //   font-size: 50%;
-  // }
+  font-size: calc(1000vw / 1400);
+  @include mq(s) {
+    font-size: calc(1000vw / 375);
+  }
 }
 
 body {
-  font-family: $primaryFont;
-  font-weight: map-get($fontWeightList, primary);
+  font-family: nth(map-get($fontList, primary), 1);
+  font-weight: nth(map-get($fontList, primary), 2);
   font-size: font-clamp(map-get($fontSizeList, "sm"));
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   line-height: 1.7;
   font-feature-settings: "palt";
   letter-spacing: 0.1em;
@@ -37,28 +39,14 @@ sup {
   color: $selectionColor;
 }
 
-_:lang(x)::-ms-backdrop,
-.selector {
-  font-family: "Segoe UI", Meiryo, sans-serif;
-}
-
-@media all and (-ms-high-contrast: none) {
-  body {
-    width: 100%;
-    overflow-x: hidden;
-  }
-}
-
 a {
   text-decoration: none;
-  color: $baseColor;
-}
-
-a:hover,
-a:focus,
-a:visited {
-  text-decoration: none;
-  color: $baseColor;
+  color: inherit;
+  &:focus,
+  &:hover,
+  &:visited {
+    text-decoration: inherit;
+  }
 }
 
 img {
@@ -75,17 +63,18 @@ button {
 
 main {
   display: block;
-  @if $fixedHeader == true {
-    min-height: calc(100vh - #{$headerHeight});
-  } @else {
+  @if $fixedHeader and $headerOverWrap {
+    padding-top: map-get($headerHeight, pc);
     min-height: 100vh;
-  }
-  @if $headerOverWrap == true {
-    padding-top: $headerHeight;
-    @include mqS {
-      padding-top: $headerHeightSP;
+    @include mq(s) {
+      padding-top: map-get($headerHeight, sp);
+    }
+  } @else if($fixedHeader != true) {
+    min-height: calc(100vh - #{map-get($headerHeight, pc)});
+    @include mq(s) {
+      min-height: calc(100vh - #{map-get($headerHeight, sp)});
     }
   } @else {
-    padding-top: 0;
+    min-height: 100vh;
   }
 }

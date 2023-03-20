@@ -1,108 +1,88 @@
 @use "../global" as *;
 
-// flex
-@include mqAll("flex") {
-  display: flex;
-}
-@include mqAll("fw") {
-  &-w {
-    flex-wrap: wrap;
-  }
-  &-nw {
-    flex-wrap: nowrap;
-  }
-  &-wr {
-    flex-wrap: wrap-reverse;
-  }
-}
-@include mqAll("fd") {
-  &-r {
-    flex-direction: row;
-  }
+/* utilities: flexbox */
 
-  &-rr {
-    flex-direction: row-reverse;
-  }
+$utilities: (
+  flexbox: (
+    flex: (
+      property: display,
+      values: flex,
+    ),
+    fw: (
+      property: flex-wrap,
+      values: (
+        w: wrap,
+        nw: nowrap,
+        wr: wrap-reverse,
+      ),
+    ),
+    fd: (
+      property: flex-direction,
+      values: (
+        r: row,
+        rr: row-reverse,
+        cr: column-reverse,
+        c: column,
+      ),
+    ),
+    jc: (
+      property: justify-content,
+      values: (
+        c: center,
+        sb: space-between,
+        sa: space-around,
+        fe: flex-end,
+        fs: flex-start,
+      ),
+    ),
+    ai: (
+      property: align-items,
+      values: (
+        c: center,
+        fe: flex-end,
+        fs: flex-start,
+      ),
+    ),
+    as: (
+      property: align-self,
+      values: (
+        fs: flex-start,
+        c: center,
+        fe: flex-end,
+        st: stretch,
+      ),
+    ),
+    fs: (
+      property: flex-shrink,
+      values: (
+        1: 1,
+        0: 0,
+      ),
+    ),
+    fg: (
+      property: flex-grow,
+      values: (
+        1: 1,
+        0: 0,
+      ),
+    ),
+    fb: (
+      property: flex-basis,
+      values: (
+        a: auto,
+        0: 0,
+      ),
+    ),
+    gap: (
+      property: gap,
+      increment: (
+        min: 0,
+        max: 20,
+        step: 1,
+        unit: "%",
+      ),
+    ),
+  ),
+);
 
-  &-cr {
-    flex-direction: column-reverse;
-  }
-
-  &-c {
-    flex-direction: column;
-  }
-}
-@include mqAll("jc") {
-  &-c {
-    justify-content: center;
-  }
-
-  &-sb {
-    justify-content: space-between;
-  }
-
-  &-sa {
-    justify-content: space-around;
-  }
-
-  &-fe {
-    justify-content: flex-end;
-  }
-
-  &-fs {
-    justify-content: flex-start;
-  }
-}
-@include mqAll("ai") {
-  &-c {
-    align-items: center;
-  }
-
-  &-fe {
-    align-items: flex-end;
-  }
-
-  &-fs {
-    align-items: flex-start;
-  }
-}
-@include mqAll("as") {
-  &-fs {
-    align-self: flex-start;
-  }
-  &-c {
-    align-self: center;
-  }
-  &-fe {
-    align-self: flex-end;
-  }
-  &-st {
-    align-self: stretch;
-  }
-}
-@include mqAll("fs") {
-  &-1 {
-    flex-shrink: 1;
-  }
-
-  &-0 {
-    flex-shrink: 0;
-  }
-}
-@include mqAll("fg") {
-  &-1 {
-    flex-grow: 1;
-  }
-
-  &-0 {
-    flex-grow: 0;
-  }
-}
-
-@include mqAll("gap") {
-  @for $i from 0 through 20 {
-    &-#{$i} {
-      gap: #{$i} + "%";
-    }
-  }
-}
+@include utilityMap($utilities, "flexbox");

@@ -1,269 +1,251 @@
 @use "../global" as *;
-/* utility layout */
 
-// display
+/* utilities: layout */
 
-@include mqAll("d") {
-  &-b {
-    display: block;
-  }
-  &-ib {
-    display: inline-block;
-  }
-  &-if {
-    display: inline-flex;
-  }
-  &-i {
-    display: inline;
-  }
-  &-f {
-    display: flex;
-  }
-  &-n {
-    display: none;
-  }
-}
+$positionIncrements1: (
+  min: 0,
+  max: 100,
+  step: 1,
+  unit: "%",
+);
+$positionIncrements2: (
+  min: -100,
+  max: -1,
+  step: 1,
+  unit: "%",
+);
 
-// box-decoration-break
+$utilities: (
+  layout: (
+    d: (
+      property: display,
+      values: (
+        b: block,
+        ib: inline-block,
+        if: inline-flex,
+        i: inline,
+        f: flex,
+        n: none,
+      ),
+    ),
+    bdb: (
+      property: box-decoration-break,
+      values: (
+        s: slice,
+        c: clone,
+      ),
+    ),
+    f: (
+      property: float,
+      values: (
+        l: left,
+        r: right,
+        n: none,
+      ),
+    ),
+    clear: (
+      property: clear,
+      values: both,
+    ),
+    of: (
+      property: overflow,
+      values: (
+        a: auto,
+        s: scroll,
+        h: hidden,
+      ),
+    ),
+    of-x: (
+      property: overflow-x,
+      values: (
+        a: auto,
+        s: scroll,
+        h: hidden,
+      ),
+    ),
+    of-y: (
+      property: overflow-y,
+      values: (
+        a: auto,
+        s: scroll,
+        h: hidden,
+      ),
+    ),
+    osb: (
+      property: overscroll-behavior,
+      values: (
+        a: auto,
+        c: contain,
+        n: none,
+      ),
+    ),
+    osb-x: (
+      property: overscroll-behavior-x,
+      values: (
+        a: auto,
+        c: contain,
+        n: none,
+      ),
+    ),
+    osb-y: (
+      property: overscroll-behavior-y,
+      values: (
+        a: auto,
+        c: contain,
+        n: none,
+      ),
+    ),
+    pos: (
+      property: position,
+      values: (
+        s: static,
+        f: fixed,
+        a: absolute,
+        r: relative,
+        sticky: sticky,
+      ),
+    ),
+    pos-t: (
+      property: top,
+      increment: $positionIncrements1,
+    ),
+    pos-t-m: (
+      property: top,
+      increment: $positionIncrements2,
+    ),
+    pos-r: (
+      property: right,
+      increment: $positionIncrements1,
+    ),
+    pos-r-m: (
+      property: right,
+      increment: $positionIncrements2,
+    ),
+    pos-b: (
+      property: bottom,
+      increment: $positionIncrements1,
+    ),
+    pos-b-m: (
+      property: bottom,
+      increment: $positionIncrements2,
+    ),
+    pos-l: (
+      property: left,
+      increment: $positionIncrements1,
+    ),
+    pos-l-m: (
+      property: left,
+      increment: $positionIncrements2,
+    ),
+    pos-x: (
+      property: (
+        left,
+        right,
+        margin,
+      ),
+      values: (
+        a: (
+          0,
+          0,
+          auto,
+        ),
+      ),
+    ),
+    pos-y: (
+      property: (
+        top,
+        bottom,
+        margin,
+      ),
+      values: (
+        a: (
+          0,
+          0,
+          auto,
+        ),
+      ),
+    ),
+    pos-xy: (
+      property: (
+        top,
+        right,
+        bottom,
+        left,
+        margin,
+      ),
+      values: (
+        a: (
+          0,
+          0,
+          0,
+          0,
+          auto,
+        ),
+      ),
+    ),
+    zi: (
+      property: z-index,
+      increment: (
+        (
+          min: 0,
+          max: 5,
+          step: 1,
+        ),
+        (
+          min: 9995,
+          max: 10005,
+          step: 1,
+        ),
+      ),
+      values: (
+        m1: -1,
+      ),
+    ),
+    ofi: (
+      property: (
+        object-fit,
+        object-position,
+      ),
+      values: (
+        cover: (
+          cover,
+          center,
+        ),
+        contain: (
+          contain,
+          center,
+        ),
+        none: (
+          none,
+          center,
+        ),
+      ),
+    ),
+    ofi-p: (
+      property: object-position,
+      values: (
+        tl: (
+          top left,
+        ),
+        tr: (
+          top right,
+        ),
+        br: (
+          bottom right,
+        ),
+        bl: (
+          bottom left,
+        ),
+        tc: (
+          top center,
+        ),
+        bc: (
+          bottom center,
+        ),
+        c: center,
+      ),
+    ),
+  ),
+);
 
-.bdb-s {
-  box-decoration-break: slice;
-}
-.bdb-c {
-  box-decoration-break: clone;
-}
-
-// float
-
-@include mqAll("f") {
-  &-l {
-    float: left;
-  }
-  &-r {
-    float: right;
-  }
-  &-n {
-    float: none;
-  }
-}
-
-.clear {
-  clear: both;
-}
-
-// object fit
-
-@include mqAll("ofi") {
-  object-fit: cover;
-  object-position: center;
-  font-family: "object-fit: cover;";
-  width: 100%;
-  height: 100%;
-  &-n {
-    object-fit: none;
-  }
-}
-
-// overflow
-
-@include mqAll("of") {
-  &-a {
-    overflow: auto;
-  }
-  &-x-a {
-    overflow-x: auto;
-  }
-  &-y-a {
-    overflow-y: auto;
-  }
-  &-h {
-    overflow: hidden;
-  }
-  &-x-h {
-    overflow-x: hidden;
-  }
-  &-y-h {
-    overflow-y: hidden;
-  }
-  &-s {
-    overflow: scroll;
-  }
-  &-x-s {
-    overflow-x: scroll;
-  }
-  &-y-s {
-    overflow-y: scroll;
-  }
-}
-
-// overscroll behavior
-
-@include mqAll("osb") {
-  &-a {
-    overscroll-behavior: auto;
-  }
-  &-x-a {
-    overscroll-behavior-x: auto;
-  }
-  &-y-a {
-    overscroll-behavior-y: auto;
-  }
-  &-c {
-    overscroll-behavior: contain;
-  }
-  &-x-c {
-    overscroll-behavior-x: contain;
-  }
-  &-y-c {
-    overscroll-behavior-y: contain;
-  }
-  &-n {
-    overscroll-behavior: none;
-  }
-  &-x-n {
-    overscroll-behavior-x: none;
-  }
-  &-y-n {
-    overscroll-behavior-y: none;
-  }
-}
-
-// position
-
-@include mqAll("pos") {
-  &-s {
-    position: static;
-  }
-  &-f {
-    position: fixed;
-  }
-  &-a {
-    position: absolute;
-  }
-  &-r {
-    position: relative;
-  }
-  &-sticky {
-    position: sticky;
-  }
-  &-t {
-    &-0 {
-      top: 0%;
-    }
-    &-25 {
-      top: 25%;
-    }
-    &-50 {
-      top: 50%;
-    }
-    &-75 {
-      top: 75%;
-    }
-    &-100 {
-      top: 100%;
-    }
-  }
-  &-r {
-    &-0 {
-      right: 0%;
-    }
-    &-25 {
-      right: 25%;
-    }
-    &-50 {
-      right: 50%;
-    }
-    &-75 {
-      right: 75%;
-    }
-    &-100 {
-      right: 100%;
-    }
-  }
-  &-b {
-    &-0 {
-      bottom: 0%;
-    }
-    &-25 {
-      bottom: 25%;
-    }
-    &-50 {
-      bottom: 50%;
-    }
-    &-75 {
-      bottom: 75%;
-    }
-    &-100 {
-      bottom: 100%;
-    }
-  }
-  &-l {
-    &-0 {
-      left: 0%;
-    }
-    &-25 {
-      left: 25%;
-    }
-    &-50 {
-      left: 50%;
-    }
-    &-75 {
-      left: 75%;
-    }
-    &-100 {
-      left: 100%;
-    }
-  }
-  &-x-c {
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
-  &-y-c {
-    top: 0;
-    bottom: 0;
-    margin: auto;
-  }
-  &-xy-c {
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-  }
-}
-
-// z-index
-
-@include mqAll("zi") {
-  &-0 {
-    z-index: 0;
-  }
-  &-1 {
-    z-index: 1;
-  }
-  &-2 {
-    z-index: 2;
-  }
-  &-3 {
-    z-index: 3;
-  }
-  &-4 {
-    z-index: 4;
-  }
-  &-5 {
-    z-index: 5;
-  }
-  &-m1 {
-    z-index: -1;
-  }
-  &-limit {
-    z-index: 99999;
-  }
-  &-limit-m1 {
-    z-index: 99998;
-  }
-  &-limit-m2 {
-    z-index: 99997;
-  }
-}
+@include utilityMap($utilities, "layout");
