@@ -1,169 +1,123 @@
 @use "../global" as *;
 
-// font-family
-@each $key, $font in $fontFamilyList {
-  .font-#{$key} {
-    font-family: $font;
-    @each $key2, $weight in $fontWeightList {
-      @if $key == $key2 {
-        font-weight: $weight;
-      }
-    }
-  }
-}
+/* utilities: typography */
 
-// color
-@each $key, $color in $colorList {
-  .color-#{$key} {
-    color: $color;
-  }
-  a.color-#{$key} {
-    color: $color;
-  }
-}
+$utilities: (
+  typography: (
+    font: (
+      property: (
+        font-family,
+        font-weight,
+      ),
+      values: $fontList,
+    ),
+    fs: (
+      property: font-style,
+      values: (
+        n: normal,
+        i: italic,
+      ),
+    ),
+    fw: (
+      property: font-weight,
+      increment: (
+        min: 1,
+        max: 9,
+        step: 100,
+      ),
+      values: (
+        n: normal,
+        b: bold,
+      ),
+    ),
+    ls: (
+      property: letter-spacing,
+      increment: (
+        min: 0,
+        max: 10,
+        step: 0.1,
+        unit: em,
+      ),
+      values: $letterSpacingList,
+    ),
+    lh: (
+      property: line-height,
+      values: $lineHeightList,
+    ),
+    ta: (
+      property: text-align,
+      values: (
+        l: left,
+        c: center,
+        r: right,
+        j: justify,
+      ),
+    ),
+    td: (
+      property: text-decoration,
+      values: (
+        u: underline,
+        lt: line-through,
+        n: none,
+      ),
+    ),
+    tuo: (
+      property: text-underline-offset,
+      increment: (
+        min: 0,
+        max: 10,
+        step: 0.1,
+        unit: rem,
+      ),
+    ),
+    va: (
+      property: vertical-align,
+      values: (
+        bl: baseline,
+        t: top,
+        m: middle,
+        b: bottom,
+        tt: text-top,
+        tb: text-bottom,
+      ),
+    ),
+    ow: (
+      property: overflow-wrap,
+      values: (
+        bw: break-word,
+      ),
+    ),
+    wb: (
+      property: word-break,
+      values: (
+        ba: break-all,
+        ka: keep-all,
+      ),
+    ),
+    ws: (
+      property: white-space,
+      values: (
+        n: normal,
+        nw: nowrap,
+      ),
+    ),
+    wm: (
+      property: writing-mode,
+      values: (
+        ht: horizontal-tb,
+        vrl: vertical-rl,
+      ),
+    ),
+    color: (
+      property: color,
+      values: $colorList,
+    ),
+    fz: (
+      property: font-size,
+      function: font-clamp,
+      values: $fontSizeList,
+    ),
+  ),
+);
 
-// font-size
-@include mqAll("fz") {
-  @each $key, $fz in $fontSizeList {
-    &-#{$key} {
-      font-size: font-clamp($fz);
-    }
-  }
-}
-
-// font-style
-.italic,
-.fs-i {
-  font-style: italic;
-}
-
-// font-weight
-.bold,
-.fw-b {
-  font-weight: bold;
-}
-
-.fw-n {
-  font-weight: normal;
-}
-
-.fw-100 {
-  font-weight: 100;
-}
-
-.fw-200 {
-  font-weight: 200;
-}
-
-.fw-300 {
-  font-weight: 300;
-}
-
-.fw-400 {
-  font-weight: 400;
-}
-
-.fw-500 {
-  font-weight: 500;
-}
-
-.fw-600 {
-  font-weight: 600;
-}
-
-.fw-700 {
-  font-weight: 700;
-}
-
-// letter-spacing
-@each $key, $ls in $letterSpacingList {
-  .ls-#{$key} {
-    letter-spacing: $ls;
-  }
-}
-
-// line-height
-@include mqAll("lh") {
-  @each $key, $lh in $lineHeightList {
-    &-#{$key} {
-      line-height: $lh;
-    }
-  }
-}
-
-// text-align
-@include mqAll("ta") {
-  &-l {
-    text-align: left;
-  }
-  &-c {
-    text-align: center;
-  }
-  &-r {
-    text-align: right;
-  }
-  &-j {
-    text-align: justify;
-  }
-}
-
-// text-decoration系
-
-.td-u {
-  text-decoration: underline;
-}
-.td-lt {
-  text-decoration: line-through;
-}
-.td-n {
-  text-decoration: none;
-}
-@for $i from 1 through 5 {
-  .tu-o-#{$i} {
-    text-underline-offset: #{$i}+ "px";
-  }
-}
-
-// vertical-align
-.va-bl {
-  vertical-align: baseline;
-}
-.va-t {
-  vertical-align: top;
-}
-.va-m {
-  vertical-align: middle;
-}
-.va-b {
-  vertical-align: bottom;
-}
-.va-tt {
-  vertical-align: text-top;
-}
-.va-tb {
-  vertical-align: text-bottom;
-}
-
-// word break系
-.ow-bw {
-  overflow-wrap: break-word;
-}
-.wb-ba {
-  word-break: break-all;
-}
-
-.ws-n {
-  white-space: normal;
-}
-
-.ws-nw {
-  white-space: nowrap;
-}
-
-// writing mode
-.wm-ht {
-  writing-mode: horizontal-tb;
-}
-.wm-vrl {
-  writing-mode: vertical-rl;
-}
+@include utilityMap($utilities, "typography");

@@ -8,198 +8,64 @@ component style
 
 // 上下のセクション
 
-.block-common {
-  margin-top: $sectionPadding;
-  margin-bottom: $sectionPadding;
-  @include mqS {
-    margin-top: $sectionPaddingSP;
-    margin-bottom: $sectionPaddingSP;
+@each $classKey, $classVal in map-get($blockStyling, blockClasses) {
+  $classPrefix: "block";
+  $size: map-get($blockStyling, blockSizes);
+  $sizesLength: length($size);
+  @for $i from 1 through calc($sizesLength + 1) {
+    $sizesKeys: map-keys($size);
+    $sizesVals: map-values($size);
+    $hyphen: "";
+    $sizesKey: "";
+    $sizesVal: 1;
+    @if ($i > 1) {
+      $hyphen: "-";
+      $sizesKey: nth($sizesKeys, $i - 1);
+      $sizesVal: nth($sizesVals, $i - 1);
+    }
+    .#{$classPrefix}-#{$classKey}#{$hyphen}#{$sizesKey} {
+      @each $amountKey, $amountVal in map-get($blockStyling, spaceAmount) {
+        @if ($amountKey == default) {
+          @each $properties in $classVal {
+            #{$properties}: calc($amountVal * $sizesVal);
+          }
+        } @else {
+          @include mq($amountKey) {
+            @each $properties in $classVal {
+              #{$properties}: calc($amountVal * $sizesVal);
+            }
+          }
+        }
+      }
+    }
   }
 }
 
-.block-large {
-  margin-top: calc($sectionPadding * 2);
-  margin-bottom: calc($sectionPadding * 2);
-  @include mqS {
-    margin-top: calc($sectionPaddingSP * 2);
-    margin-bottom: calc($sectionPaddingSP * 2);
-  }
-}
+// // 左右のボックス幅
 
-.block-narrow {
-  margin-top: calc($sectionPadding / 2);
-  margin-bottom: calc($sectionPadding / 2);
-  @include mqS {
-    margin-top: calc($sectionPaddingSP / 2);
-    margin-bottom: calc($sectionPaddingSP / 2);
-  }
-}
-
-.block-top {
-  margin-bottom: $sectionPadding;
-  @include mqS {
-    margin-bottom: $sectionPaddingSP;
-  }
-}
-
-.block-top-large {
-  margin-bottom: calc($sectionPadding * 2);
-  @include mqS {
-    margin-bottom: calc($sectionPaddingSP * 2);
-  }
-}
-
-.block-top-narrow {
-  margin-bottom: calc($sectionPadding / 2);
-  @include mqS {
-    margin-bottom: calc($sectionPaddingSP / 2);
-  }
-}
-
-.block-bottom {
-  margin-top: $sectionPadding;
-  @include mqS {
-    margin-top: $sectionPaddingSP;
-  }
-}
-
-.block-bottom-large {
-  margin-top: calc($sectionPadding * 2);
-  @include mqS {
-    margin-top: calc($sectionPaddingSP * 2);
-  }
-}
-
-.block-bottom-narrow {
-  margin-top: calc($sectionPadding / 2);
-  @include mqS {
-    margin-top: calc($sectionPaddingSP / 2);
-  }
-}
-
-// 左右のボックス幅
-
-.box-common {
-  @include boxSetting($widthL, content-box, 2%);
-  margin-right: auto;
-  margin-left: auto;
-  @include mqSM {
-    @include boxSetting(100%, border-box, 4%);
-  }
-  @include mqS {
-    @include boxSetting(100%, border-box, 4%);
-  }
-}
-
-.box-wide {
-  @include boxSetting($widthXL, content-box, 2%);
-  margin-right: auto;
-  margin-left: auto;
-  @include mqSM {
-    @include boxSetting(100%, border-box, 4%);
-  }
-  @include mqS {
-    @include boxSetting(100%, border-box, 4%);
-  }
-}
-
-.box-medium {
-  @include boxSetting($widthM, border-box, 0%);
-  margin-right: auto;
-  margin-left: auto;
-  @include mqSM {
-    @include boxSetting(100%, border-box, 4%);
-  }
-  @include mqS {
-    @include boxSetting(100%, border-box, 4%);
-  }
-}
-
-.box-short {
-  @include boxSetting($widthS, border-box, 0%);
-  margin-right: auto;
-  margin-left: auto;
-  @include mqSM {
-    @include boxSetting(100%, border-box, 4%);
-  }
-  @include mqS {
-    @include boxSetting(100%, border-box, 4%);
+@each $boxKey, $boxVal in $boxStyling {
+  $classPrefix: "box";
+  .#{$classPrefix}-#{$boxKey} {
+    margin-left: auto;
+    margin-right: auto;
+    @if (type-of($boxVal) == list) {
+      max-width: px-vw(nth($boxVal, 1), map-get($canvasSize, pc));
+      @include mq(s) {
+        max-width: px-vw(nth($boxVal, 2), map-get($canvasSize, sp));
+      }
+    } @else {
+      max-width: px-vw(nth($boxVal, 1), map-get($canvasSize, pc));
+    }
   }
 }
 
 // hover時の挙動
 
-.hov-ptn01 {
-  transition: 0.2s;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-  &:before,
-  &:after {
-    content: "";
-    position: absolute;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    background: $baseColor;
-    left: 0;
-  }
-  &:before {
-    top: 100%;
-    transition: top 0s;
-  }
-  &:after {
-    top: -100%;
-    transition: top 0.2s ease-in;
-  }
-  @include hover {
-    color: #fff;
-    &:before {
-      top: 0;
-      transition: 0.2s ease-out;
-    }
-    &:after {
-      top: 0;
-      transition: top 0s 0.2s;
-    }
-  }
-}
-
-.hov-ptn02 {
-  transition: 0.2s;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-  &:after {
-    content: "";
-    z-index: -1;
-    position: absolute;
-    top: 0;
-    right: -100%;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    transition: 0.2s;
-  }
-  @include hover {
-    &:after {
-      right: 0;
-    }
-  }
-}
-
-.hov-ptn03 {
-  transition: 0.2s;
-  @include hover {
-    opacity: 0.7;
-  }
-}
-
 // 電話番号のリンクはPC時は非表示
 
 .tel-link {
   pointer-events: none;
-  @include mqS {
+  @include mq(s) {
     pointer-events: all;
   }
 }
@@ -266,7 +132,7 @@ $modalBgColor: rgba(0, 0, 0, 0.5); //モーダル背面の背景色
   height: $modalCloseSize;
   z-index: 9999;
   cursor: pointer;
-  @include mqS {
+  @include mq(s) {
     width: $modalCloseSizeSp;
     height: $modalCloseSizeSp;
     top: $modalClosePositionSp;
@@ -343,3 +209,7 @@ $modalBgColor: rgba(0, 0, 0, 0.5); //モーダル背面の背景色
     transform: rotate(-45deg);
   }
 }
+
+// title
+
+// btn
