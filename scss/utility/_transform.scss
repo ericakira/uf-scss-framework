@@ -9,13 +9,21 @@ $utilities: (
       values: (
         c: center,
         t: top,
-        t-r: top right,
+        t-r: (
+          top right,
+        ),
         r: right,
-        b-r: bottom right,
+        b-r: (
+          bottom right,
+        ),
         b: bottom,
-        b-l: bottom left,
+        b-l: (
+          bottom left,
+        ),
         l: left,
-        t-l: top left,
+        t-l: (
+          top left,
+        ),
       ),
     ),
     tf-r: (

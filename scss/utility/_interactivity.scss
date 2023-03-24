@@ -2,25 +2,97 @@
 
 /* utilities: interactivities */
 
-.ap-n {
-  appearance: none;
-}
+$utilities: (
+  interactivities: (
+    ap: (
+      property: appearance,
+      values: (
+        n: none,
+        a: auto,
+      ),
+    ),
+    cs: (
+      property: cursor,
+      values: (
+        a: auto,
+        p: pointer,
+        na: not-allowed,
+        h: help,
+        vt: vertical-text,
+        g: grab,
+      ),
+    ),
+    o: (
+      property: outline,
+      values: (
+        n: none,
+      ),
+    ),
+    pe: (
+      property: pointer-events,
+      values: (
+        n: none,
+        a: auto,
+      ),
+    ),
+    filter-i: (
+      property: filter,
+      increment: (
+        min: 0,
+        max: 1,
+        step: 1,
+        wrap: invert,
+      ),
+    ),
+    filter-bn: (
+      property: filter,
+      increment: (
+        min: 0,
+        max: 2,
+        step: 1,
+        wrap: brightness,
+      ),
+    ),
+    filter-c: (
+      property: filter,
+      increment: (
+        min: 0,
+        max: 2,
+        step: 1,
+        wrap: contrast,
+      ),
+    ),
+    filter-g: (
+      property: filter,
+      increment: (
+        min: 0,
+        max: 1,
+        step: 1,
+        wrap: grayscale,
+      ),
+    ),
+    filter-sa: (
+      property: filter,
+      increment: (
+        min: 0,
+        max: 1,
+        step: 1,
+        wrap: saturate,
+      ),
+    ),
+    filter-se: (
+      property: filter,
+      increment: (
+        min: 0,
+        max: 1,
+        step: 1,
+        wrap: sepia,
+      ),
+    ),
+  ),
+);
 
-.cs-p {
-  cursor: pointer;
-}
-
-.cs-na {
-  cursor: not-allowed;
-}
-
-.o-n {
-  outline: 0;
-}
-
-.pe-n {
-  pointer-events: none;
-}
+@include utilityMap($utilities, "interactivities");
 
 .filter-i-0 {
   filter: invert(0);
