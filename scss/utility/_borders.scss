@@ -5,8 +5,8 @@
 $borderIncrements: (
   min: 0,
   max: 10,
-  step: 1,
-  unit: px,
+  step: 0.1,
+  unit: rem,
   properties: (
     solid,
     inherit,
@@ -114,4 +114,5 @@ $utilities: (
   ),
 );
 
-@include utilityMap($utilities, "borders");
+//@include utilityMap($utilities, "borders");
+@include utilityGenerator($utilities, "borders");

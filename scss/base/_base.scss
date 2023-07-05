@@ -16,7 +16,7 @@ html {
 body {
   font-family: nth(map-get($fontList, primary), 1);
   font-weight: nth(map-get($fontList, primary), 2);
-  font-size: font-clamp(map-get($fontSizeList, "sm"));
+  font-size: map-get($fontSizeList, "sm");
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   line-height: 1.7;

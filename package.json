@@ -1,0 +1,24 @@
+{
+  "name": "uf-scss-framework",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile:sass": "sass scss/style.scss css/style.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ericakira/uf-scss-framework.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ericakira/uf-scss-framework/issues"
+  },
+  "homepage": "https://github.com/ericakira/uf-scss-framework#readme",
+  "devDependencies": {
+    "sass": "^1.63.6"
+  }
+}

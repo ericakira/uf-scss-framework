@@ -2,17 +2,19 @@
 
 /* utilities: layout */
 
-$positionIncrements1: (
-  min: 0,
-  max: 100,
-  step: 1,
-  unit: "%",
-);
-$positionIncrements2: (
-  min: -100,
-  max: -1,
-  step: 1,
-  unit: "%",
+$positionIncrements: (
+  (
+    min: -100,
+    max: -1,
+    step: 1,
+    unit: "%",
+  ),
+  (
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: "%",
+  )
 );
 
 $utilities: (
@@ -107,35 +109,19 @@ $utilities: (
     ),
     pos-t: (
       property: top,
-      increment: $positionIncrements1,
-    ),
-    pos-t-m: (
-      property: top,
-      increment: $positionIncrements2,
+      increment: $positionIncrements,
     ),
     pos-r: (
       property: right,
-      increment: $positionIncrements1,
-    ),
-    pos-r-m: (
-      property: right,
-      increment: $positionIncrements2,
+      increment: $positionIncrements,
     ),
     pos-b: (
       property: bottom,
-      increment: $positionIncrements1,
-    ),
-    pos-b-m: (
-      property: bottom,
-      increment: $positionIncrements2,
+      increment: $positionIncrements,
     ),
     pos-l: (
       property: left,
-      increment: $positionIncrements1,
-    ),
-    pos-l-m: (
-      property: left,
-      increment: $positionIncrements2,
+      increment: $positionIncrements,
     ),
     pos-x: (
       property: (
@@ -248,4 +234,5 @@ $utilities: (
   ),
 );
 
-@include utilityMap($utilities, "layout");
+//@include utilityMap($utilities, "layout");
+@include utilityGenerator($utilities, "layout");

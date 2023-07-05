@@ -4,40 +4,41 @@
 
 $utilities: (
   state: (
-    is: (
-      property: display,
-      values: (
-        sp: none#{"!"},
-        sp-tb: none#{"!"},
-        tb: none#{"!"},
-        tb-pc: block#{"!"},
-        pc: block#{"!"},
+    // is: (
+    //   property: display,
+    //   values: (
+    //     sp: none#{"!"},
+    //     sp-tb: none#{"!"},
+    //     tb: none#{"!"},
+    //     tb-pc: block#{"!"},
+    //     pc: block#{"!"},
+    //   ),
+    //   responsive: (
+    //     sp: (
+    //       values: (
+    //         sp: block#{"!"},
+    //         sp-tb: block#{"!"},
+    //         tb: none#{"!"},
+    //         tb-pc: none#{"!"},
+    //         pc: none#{"!"},
+    //       ),
+    //     ),
+    //     tb: (
+    //       values: (
+    //         sp: none#{"!"},
+    //         sp-tb: block#{"!"},
+    //         tb: block#{"!"},
+    //         tb-pc: block#{"!"},
+    //         pc: none#{"!"},
+    //       ),
+    //     ),
+    //   ),
+    // ),
+    bg:
+      (
+        property: background-color,
+        values: $colorList,
       ),
-      responsive: (
-        sp: (
-          values: (
-            sp: block#{"!"},
-            sp-tb: block#{"!"},
-            tb: none#{"!"},
-            tb-pc: none#{"!"},
-            pc: none#{"!"},
-          ),
-        ),
-        tb: (
-          values: (
-            sp: none#{"!"},
-            sp-tb: block#{"!"},
-            tb: block#{"!"},
-            tb-pc: block#{"!"},
-            pc: none#{"!"},
-          ),
-        ),
-      ),
-    ),
-    bg: (
-      property: background-color,
-      values: $colorList,
-    ),
     o: (
       property: opacity,
       increment: (
@@ -90,4 +91,5 @@ $utilities: (
   ),
 );
 
-@include utilityMap($utilities, "state");
+//@include utilityMap($utilities, "state");
+@include utilityGenerator($utilities, "state");

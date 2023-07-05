@@ -92,12 +92,5 @@ $utilities: (
   ),
 );
 
-@include utilityMap($utilities, "interactivities");
-
-.filter-i-0 {
-  filter: invert(0);
-}
-
-.filter-i-1 {
-  filter: invert(1);
-}
+//@include utilityMap($utilities, "interactivities");
+@include utilityGenerator($utilities, "interactivities");

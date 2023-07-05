@@ -1,0 +1,450 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>コーディングレギュレーション</title>
+  <meta name="description" content="LAMP DEV TEAM CODING REGULATION">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;500&family=Roboto+Mono:wght@300;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-css.min.js" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/themes/prism-okaidia.min.css" />
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sunburst"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/components/prism-core.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.22.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+  <script src="./js/uf-util.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <header class="header">
+      <div class="header-inner">
+        <h1 class="font-secondary">LAMP Coding Regulation & SCSS Framework</h1>
+        <div class="gnav-btn js-gnav-toggle"><span></span></div>
+        <nav class="gnav gnav--pos-right">
+          <div class="gnav-inner flex ai-c jc-c">
+            <ul class="font-secondary ta-c fz-x4l">
+              <li class="mb-s"><a href="">aaa</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="block-common">
+        <div class="box-common">
+          <div class="color-primary bf:w-100 bf:h-100 bf:pos-a bf:pos-t-0 bf:pos-l-0 bf:bg-secondary">あああああ</div>
+          <div class="bg-accent bf:w-20"></div>
+        </div>
+      </section>
+
+      <section class="block-common">
+        <div class="box-common">
+          <h1 class="fz-xl ls-m bg-primary color-white px-s py-s lh-s fw-500 mb-sm">INTRODUCTION</h1>
+          <p>コーディング用のレギュレーション、作りました。(2022/4/2現在)</p>
+        </div>
+      </section>
+      <section class="block-common">
+        <div class="box-common">
+          <div class="bd-b-w-1 pb-l bd-c-accent">
+            <h2 class="fz-xl ls-m bd-l-w-5 bd-c-secondary pl-s lh-s fw-500 mb-sm">HTML</h2>
+            <dl>
+              <dt class="fw-500 mb-xs">バージョン</dt>
+              <dd class="mb-sm"><a href="https://momdo.github.io/html/" class="td-u tu-o-2 color-primary" target="_blank">HTML Living Standard</a></dd>
+              <dt class="fw-500 mb-xs">DTD</dt>
+              <dd class="mb-sm">
+                <code>&lt;!DOCTYPE html&gt;</code>
+              </dd>
+              <dt class="fw-500 mb-xs">文字コード</dt>
+              <dd>UTF-8(BOM無し)</dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+      <section class="block-common">
+        <div class="box-common">
+          <div class="bd-b-w-1 pb-l bd-c-accent">
+            <h2 class="fz-xl ls-m bd-l-w-5 bd-c-secondary pl-s lh-s fw-500 mb-sm">CSS</h2>
+            <dl>
+              <dt class="fw-500 mb-xs">バージョン</dt>
+              <dd class="mb-sm"><a href="https://www.w3.org/Style/CSS/" class="td-u tu-o-2 color-primary" target="_blank">CSS3</a></dd>
+              <dt class="fw-500 mb-xs">実装方針</dt>
+              <dd class="mb-sm">
+                ユーティリティファーストの考え方を元に、マルチクラスによるコーディング実装。
+              </dd>
+              <dt class="fw-500 mb-xs">フォント単位</dt>
+              <dd>
+                font-size：rem（clamp関数によってvwを併用）<br>
+                line-height：単位なし（数値のみ）<br>
+                letter-spacing: em
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+      <section class="block-common">
+        <div class="box-common">
+          <div class="bd-b-w-1 pb-l bd-c-accent">
+            <h2 class="fz-xl ls-m bd-l-w-5 bd-c-secondary pl-s lh-s fw-500 mb-sm">命名規則</h2>
+            <dl>
+              <dt class="fw-500 mb-xs">HTML/CSS</dt>
+              <dd class="mb-sm">class定義についてはケバブケース(kebab-case)<br>SCSS変数や関数はキャメルケース(camelCase)を使用</dd>
+              <dt class="fw-500 mb-xs">javascript</dt>
+              <dd class="mb-sm">キャメルケース(camelCase)</dd>
+              <dt class="fw-500 mb-xs">PHP</dt>
+              <dd class="mb-sm">スネークケース(snake_case)</dd>
+              <dt class="fw-500 mb-xs">画像</dt>
+              <dd class="mb-sm">スネークケース(snake_case)</dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+      <section class="block-common">
+        <div class="box-common">
+          <div class="bd-b-w-1 pb-l bd-c-accent">
+            <h2 class="fz-xl ls-m bd-l-w-5 bd-c-secondary pl-s lh-s fw-500 mb-sm">検証・対応ブラウザ</h2>
+            <dl>
+              <dt class="fw-500 mb-xs">PC(Mac,Windows)</dt>
+              <dd class="mb-sm">
+                Microsoft Edge 最新版<br>
+                Firefox 最新版<br>
+                Google Chrome 最新版<br>
+                Safari 最新版<br>
+                ※Internet Explorerはサポートが終了したので非対応(2022/6/15)
+              </dd>
+              <dt class="fw-500 mb-xs">Smartphone / Tablet</dt>
+              <dd class="mb-sm">
+                iPhone：safari 最新版<br>
+                Android：chrome 最新版<br>
+              </dd>
+            </dl>
+            <p>■開発方針はレスポンシブウェブデザイン(RWD)</p>
+          </div>
+        </div>
+      </section>
+      <section class="block-common">
+        <div class="box-common">
+          <div class="bd-b-w-1 pb-l bd-c-accent">
+            <h2 class="fz-xl ls-m bd-l-w-5 bd-c-secondary pl-s lh-s fw-500 mb-sm">開発環境</h2>
+            <p class="mb-sm">案件によって柔軟に対応しますが、主に以下の下記の拡張言語によってファイルをコンパイルしていきます。</p>
+            <ul class="mb-sm">
+              <li>・HTML：Astro / ejs</li>
+              <li>・CSS：Sass(SCSS)</li>
+            </ul>
+            <p class="mb-sm">基本はVite(astro)もしくはwebpackにてコンパイル（gulpは現在利用していません）<br>SCSSコンパイラはDart Sassを利用</p>
+            <dl>
+              <dt class="fw-500">IDE</dt>
+              <dd>Visual Studio Code(VSCode)を推奨<br>次点でSublime Text</dd>
+            </dl>
+          </div>
+        </div>
+      </section>
+      <section class="block-common">
+        <div class="box-common">
+          <h1 class="fz-xl ls-m bg-primary color-white px-s py-s lh-s fw-500 mb-sm">SCSS Framework</h1>
+          <p class="mb-s">LAMP社内でゼロイチ構築する際に利用するオリジナルフレームワークです。<br><a href="https://tailwindcss.com/" class="td-u tu-o-2 color-primary" target="_blank">Tailwind CSS</a>フレームワークの設計思想に影響を受けたマルチクラス＆ユーティリティファーストなコーディングによる柔軟なカスタマイズ性が特徴です。</p>
+          <p class="mb-m">あらかじめ各cssプロパティに呼応するclassを幅広く用意しておくことで保守や修正作業時にいちいちcssを編集する手間を軽減し、俗人的にならないclass命名規則によって誰でもhtmlを編集するだけでデザインを変更できるようにすることを目的として構築しました。</p>
+        </div>
+      </section>
+      <section class="block-common">
+        <div class="box-common">
+          <div class="bd-b-w-1 pb-l bd-c-accent">
+            <h2 class="fz-xl ls-m bd-l-w-5 bd-c-secondary pl-s lh-s fw-500 mb-sm">File Index</h2>
+            <div class="file-map">
+              <p class="mb-xs">styles.scss …全てのscssを梱包しているフォルダを読み込みstyle.cssをコンパイルする</p>
+              <ul class="file-map-level1">
+                <li>
+                  <dl>
+                    <dt>global</dt>
+                    <dd class="pl-sm mb-s">
+                      <ul class="file-map-level2">
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_index.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">globalフォルダ内のscssをまとめる</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_settings.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">サイト全体の設定用</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_mixins.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">mixin(使い回しパーツ)管理用</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_functions.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">関数(計算や処理周り)管理用</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                      </ul>
+                    </dd>
+                  </dl>
+                </li>
+                <li>
+                  <dl>
+                    <dt>base</dt>
+                    <dd class="pl-sm mb-s">
+                      <ul class="file-map-level2">
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_index.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">baseフォルダ内のscssをまとめる</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_reset.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">ブラウザ間の差異を無くすリセットファイル</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_base.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">html,bodyなどのサイト全体に関わる設定</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                      </ul>
+                    </dd>
+                  </dl>
+                </li>
+                <li>
+                  <dl>
+                    <dt>layout</dt>
+                    <dd class="pl-sm mb-s">
+                      <ul class="file-map-level2">
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_index.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">layoutフォルダ内のscssをまとめる</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_header.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">ヘッダーレイアウト構築用</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_footer.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">フッターレイアウト構築用</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                      </ul>
+                    </dd>
+                  </dl>
+                </li>
+                <li>
+                  <dl>
+                    <dt>module</dt>
+                    <dd class="pl-sm mb-s">
+                      <ul class="file-map-level2">
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_index.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">moduleフォルダ内のscssをまとめる</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_project.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">ユーティリティクラスで賄えないプロジェクト毎に必要になるパーツを書く</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_component.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">ボタンやタイトルなど汎用的に使い回すコンポーネントとなるパーツを書く</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                      </ul>
+                    </dd>
+                  </dl>
+                </li>
+                <li>
+                  <dl>
+                    <dt>utility</dt>
+                    <dd class="pl-sm mb-s">
+                      <ul class="file-map-level2">
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_index.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">utilityフォルダ内のscssをまとめる</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_layout.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">レイアウトに関係するユーティリティ</p>
+                          </div>
+                          <div class="scss-detail">
+
+
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_spacing.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">paddingやmarginなどスペーシングに関係するユーティリティ</p>
+                          </div>
+                          <div class="scss-detail">
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_flexbox.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">flexbox周りのユーティリティ</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_sizing.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">widthやheightなどサイズに関係するユーティリティ</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_borders.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">boder周りのユーティリティ</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_interactivity.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">cursorなどインタラクションに関係するユーティリティ</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_typography.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">font-sizeや色などタイポグラフィに関係するユーティリティ</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_transitions.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">transitionアニメーション周りのユーティリティ</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_animations.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">animation keyframeをまとめるユーティリティ</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_transform.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">transform周りのユーティリティ</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                        <li>
+                          <div class="scss-heading flex ai-c">
+                            <h3>_state.scss</h3>
+                            <p class="scss-description fz-s pl-s color-caution">hoverやPC/SPの切り替えなど状態変化をまとめるユーティリティ＋その他</p>
+                          </div>
+                          <div class="scss-detail">
+
+                          </div>
+                        </li>
+                      </ul>
+                    </dd>
+                  </dl>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="block-common">
+        <div class="box-common">
+          <pre><code class="language-javascript">// javascriptでコンソールに「test」と表示
+console.log("test");</code></pre>
+        </div>
+      </section>
+
+
+
+    </main>
+    <footer class="footer">
+      <p class="copy ta-c"><small>copyright &copy; LAMP. All rights reserved.</small></p>
+    </footer>
+  </div>
+
+</body>
+</html>

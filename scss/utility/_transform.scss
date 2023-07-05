@@ -89,4 +89,5 @@ $utilities: (
   ),
 );
 
-@include utilityMap($utilities, "transform");
+//@include utilityMap($utilities, "transform");
+@include utilityGenerator($utilities, "transform");

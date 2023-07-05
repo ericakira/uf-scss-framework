@@ -60,4 +60,5 @@ $utilities: (
     ),
   ),
 );
-@include utilityMap($utilities, "sizing");
+//@include utilityMap($utilities, "sizing");
+@include utilityGenerator($utilities, "sizing");

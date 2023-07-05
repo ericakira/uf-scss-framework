@@ -114,10 +114,10 @@ $utilities: (
     ),
     fz: (
       property: font-size,
-      function: font-clamp,
       values: $fontSizeList,
     ),
   ),
 );
 
-@include utilityMap($utilities, "typography");
+//@include utilityMap($utilities, "typography");
+@include utilityGenerator($utilities, "typography");

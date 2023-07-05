@@ -1,0 +1,234 @@
+@use "settings" as s;
+@use "functions" as f;
+@use "mixins" as m;
+@use "sass:meta";
+@use "sass:map";
+
+// ユーティリティクラス生成用ファイル
+
+// -----------------------------
+// utilityマップで利用可能なキーと型
+// -----------------------------
+// *は必須
+// property -> string / list *
+// responsive -> bool / map
+// function -> string
+// hover -> bool
+// values -> map / list *(incrementが無ければ)
+// increment -> map / list  *(valuesが無ければ)
+//   min -> number *
+//   max -> number *
+//   step -> number *
+//   unit -> string
+//   suffix -> string
+//   properties -> list
+//   wrap -> string
+// -----------------------------
+
+// utilityGenerator
+@mixin utilityGenerator($util, $map) {
+  $bp: s.$breakpointsClass;
+  $bpLength: length($bp);
+  @for $i from 0 through $bpLength {
+    $bpKey: null;
+    $bpHyphen: "";
+    $bpValue: "";
+    $mediaQuery: "";
+    @if $i > 0 {
+      $bpKey: nth(map-keys($bp), $i);
+      $bpHyphen: "-";
+      $bpValue: map-get($bp, $bpKey);
+    }
+    @if (type-of($bpValue) == string) {
+      $mediaQuery: "(max-width: #{map-get(s.$breakpoints,$bpValue) - 1})";
+    } @else if(type-of($bpValue) == list) {
+      $mediaQuery: "(min-width: #{map-get(s.$breakpoints,nth($bpValue,1))}) and (max-width: #{map-get(s.$breakpoints,nth($bpValue,2)) - 1})";
+    }
+    @if $i == 0 {
+      @include utilityLoops($bpKey, $bpHyphen, $bpKey, $util, $map);
+    } @else {
+      @media #{$mediaQuery} {
+        @include utilityLoops($bpKey, $bpHyphen, $bpKey, $util, $map);
+      }
+    }
+  }
+}
+
+// utilityLoops
+@mixin utilityLoops($bpPrefix, $bpHyphen, $bpKey, $util, $map) {
+  @each $classPrefix, $mapValues in map-get($util, $map) {
+    $type: ("values", "increment");
+    $property: map-get($mapValues, "property");
+    $responsive: map-get($mapValues, "responsive");
+    $values: map-get($mapValues, nth($type, 1));
+    $increment: map-get($mapValues, nth($type, 2));
+    $functionName: map-get($mapValues, "function");
+    $hover: map-get($mapValues, "hover");
+    @if ($responsive != false or $bpKey == null) {
+      // responsive設定がfalseの時は以下に進まない
+      @each $utilityType in $type {
+        @if (map-get($mapValues, $utilityType) != null) {
+          $styleValues: map-get($mapValues, $utilityType);
+          $return: ();
+          @if type-of($styleValues) == list {
+            // incrementキーの値が配列だった場合（複数設定が入っている時）
+            @for $i from 1 through length($styleValues) {
+              $styles: null;
+              @if $utilityType == nth($type, 2) {
+                $styles: utilityIncrementSettings(nth($styleValues, $i));
+              } @else {
+                $styles: nth($styleValues, $i);
+              }
+              $return: append($return, $styles);
+            }
+
+            // $returnの配列が2次元ネストされるのでjoinで展開する
+            $flattened-array: ();
+            @each $tmp-array in $return {
+              $flattened-array: join($flattened-array, $tmp-array);
+            }
+            $return: $flattened-array;
+          } @else if type-of($styleValues) == map {
+            // incrementキーの値がマップだった場合（通常）
+            @if $utilityType == nth($type, 2) {
+              $return: utilityIncrementSettings($styleValues);
+            } @else {
+              $return: $styleValues;
+            }
+          }
+          @each $returnVal in $return {
+            $arg: null;
+            $classSuffix: null;
+            $hyphen: null;
+            $value: null;
+            $suffix: null;
+            $properties: null;
+            @if $utilityType == nth($type, 2) {
+              $classSuffix: nth($returnVal, 1);
+              $hyphen: nth($returnVal, 2);
+              $value: nth($returnVal, 3);
+              $suffix: nth($returnVal, 4);
+              $properties: nth($returnVal, 5);
+            } @else {
+              $classSuffix: nth($returnVal, 1);
+              $value: nth($returnVal, 2);
+              $hyphen: "-";
+            }
+            @if $functionName != null {
+              $value: checkAndApplyFunction($value, $functionName);
+            }
+            @include utilityClasses(
+              $bpPrefix,
+              $bpHyphen,
+              $classPrefix,
+              $hyphen,
+              $classSuffix,
+              $property,
+              $value,
+              $suffix,
+              $properties,
+              $hover,
+              $utilityType
+            );
+          }
+        }
+      }
+    }
+  }
+}
+
+@function checkAndApplyFunction($value, $functionName) {
+  $functions: meta.module-functions(f);
+  $function: map.get($functions, $functionName);
+  @return meta.call($function, $value);
+}
+
+@function utilityIncrementSettings($increment) {
+  $returnArray: ();
+  @for $inc from map-get($increment, "min") through map-get($increment, "max") {
+    // step値が1未満(0.1等)だった場合、class名に「.」を付けられないので小数点を正数にする
+    $step: map-get($increment, "step");
+    @if ($step < 1) {
+      $step: 1;
+    }
+    // unitキーがあった場合、値の末尾に指定した単位を付与する
+    $unit: 0;
+    @if (map-has-key($increment, "unit")) {
+      $unit: map-get($increment, "unit");
+    }
+    // min(max)値とstep値を計算した結果マイナス値だった場合はハイフンを除去する(--のように連続するのを避けるため)
+    $numbers: "#{$inc * $step}";
+    $hyphen: "-";
+    @if ($inc * $step < 0) {
+      $numbers: f.strReplace("-", "m", $numbers);
+    }
+    // min(max)値とstep値+単位の計算結果
+    $val: $inc * map-get($increment, "step") + $unit;
+    @if ($unit == "percentage" or $unit == "percent" or $unit == "%") {
+      $val: percentage(calc($inc * map-get($increment, "step") / 100));
+    }
+    // wrapキーがあった場合は計算結果をwrap値()で囲む
+    @if (map-has-key($increment, "wrap")) {
+      $val: map-get($increment, "wrap") + "(" + $val + ")";
+    }
+    // suffixキーがあった場合はclass名の最後に付け足す
+    $suffix: "";
+    @if (map-has-key($increment, "suffix")) {
+      $suffix: map-get($increment, "suffix");
+    }
+    // propertiesキーがあった場合、値を配列で返す
+    $properties: null;
+    @if (map-has-key($increment, "properties")) {
+      $properties: map-get($increment, "properties");
+    }
+
+    $returnArray: append(
+      $returnArray,
+      ($numbers, $hyphen, $val, $suffix, $properties)
+    );
+  }
+  @return $returnArray;
+}
+
+@mixin utilityClasses(
+  $bpPrefix,
+  $bpHyphen,
+  $classPrefix,
+  $hyphen,
+  $classSuffix,
+  $property,
+  $value,
+  $suffix: null,
+  $properties: null,
+  $hover,
+  $type
+) {
+  .#{$bpPrefix}#{$bpHyphen}#{$classPrefix}#{$hyphen}#{$classSuffix}#{$suffix} {
+    @if ($hover) {
+      @include m.hover() {
+        @include utilityClassStyles($property, $value, $type, $properties);
+      }
+    } @else {
+      @include utilityClassStyles($property, $value, $type, $properties);
+    }
+  }
+}
+@mixin utilityClassStyles($property, $value, $type, $properties) {
+  @if (type-of($property) == list) {
+    @for $i from 1 through length($property) {
+      @if (type-of($value) == list and $type == "values") {
+        #{nth($property,$i)}: nth($value, $i);
+      } @else if ($properties != null and $type == "increment") {
+        @if $i > 1 {
+          #{nth($property,$i)}: nth($properties, $i - 1);
+        } @else {
+          #{nth($property,$i)}: nth($value, $i);
+        }
+      } @else {
+        #{nth($property,$i)}: $value;
+      }
+    }
+  } @else {
+    #{$property}: $value;
+  }
+}

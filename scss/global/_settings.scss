@@ -1,5 +1,5 @@
 /* -----------------------------------
-uf scss framework version 2.0.0
+uf scss framework version 3.0.0
 ----------------------------------- */
 
 // デザインカンプのキャンバスサイズ
@@ -54,22 +54,22 @@ $spacesList: (
 
 // フォントサイズ
 $fontSizeList: (
-  xs: 1,
-  s: 1.2,
-  sm: 1.4,
-  m: 1.6,
-  ml: 1.8,
-  l: 2,
-  xl: 2.2,
-  xl2: 2.6,
-  xl3: 3,
-  xl4: 4,
-  xl5: 5,
-  xl6: 6,
-  xl7: 7,
-  xl8: 8,
-  xl9: 9,
-  xl10: 10,
+  xs: 1rem,
+  s: 1.2rem,
+  sm: 1.4rem,
+  m: 1.6rem,
+  ml: 1.8rem,
+  l: 2rem,
+  xl: 2.2rem,
+  xl2: 2.6rem,
+  xl3: 3rem,
+  xl4: 4rem,
+  xl5: 5rem,
+  xl6: 6rem,
+  xl7: 7rem,
+  xl8: 8rem,
+  xl9: 9rem,
+  xl10: 10rem,
 );
 
 // letteer spacing
@@ -165,6 +165,7 @@ $blockStyling: (
   ),
 );
 
+// PC,SPの順番で幅を指定
 $boxStyling: (
   common: (
     1000px,

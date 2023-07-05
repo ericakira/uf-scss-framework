@@ -130,4 +130,5 @@ $utilities: (
   ),
 );
 
-@include utilityMap($utilities, "spacing");
+//@include utilityMap($utilities, "spacing");
+@include utilityGenerator($utilities, "spacing");

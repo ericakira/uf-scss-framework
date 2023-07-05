@@ -102,11 +102,11 @@
     $n: $n * 10;
   }
   @if $round == "round" {
-    @return round($number * $n) / $n;
+    @return calc(round($number * $n) / $n);
   } @else if $round == "ceil" {
-    @return ceil($number * $n) / $n;
+    @return calc(ceil($number * $n) / $n);
   } @else if $round == "floor" {
-    @return floor($number * $n) / $n;
+    @return calc(floor($number * $n) / $n);
   } @else {
     @warn '#{ $round } is undefined keyword.';
     @return $number;

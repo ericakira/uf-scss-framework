@@ -26,4 +26,5 @@ $utilities: (
   ),
 );
 
-@include utilityMap($utilities, "transitions");
+//@include utilityMap($utilities, "transitions");
+@include utilityGenerator($utilities, "transitions");

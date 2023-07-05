@@ -85,4 +85,5 @@ $utilities: (
   ),
 );
 
-@include utilityMap($utilities, "flexbox");
+//@include utilityMap($utilities, "flexbox");
+@include utilityGenerator($utilities, "flexbox");
