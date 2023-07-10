@@ -75,15 +75,9 @@ $utilities: (
     ),
     gap: (
       property: gap,
-      increment: (
-        min: 0,
-        max: 20,
-        step: 1,
-        unit: "%",
-      ),
+      increment: $gapIncrements,
     ),
   ),
 );
 
-//@include utilityMap($utilities, "flexbox");
 @include utilityGenerator($utilities, "flexbox");

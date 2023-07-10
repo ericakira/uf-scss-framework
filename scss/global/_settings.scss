@@ -1,5 +1,5 @@
 /* -----------------------------------
-uf scss framework version 3.0.0
+uf scss framework version 3.0.1
 ----------------------------------- */
 
 // デザインカンプのキャンバスサイズ
@@ -18,13 +18,14 @@ $breakpoints: (
 
 // utility出力で利用するbreakpointクラス用
 // キーがメディアクエリ用クラスのプレフィクスになる
-// 値は上記$breakpointsで設定したものを利用する
-// 値を1文字のstringにすればmax-width、配列形式で2要素を入れるとmin-width,max-widthに変換される
+// 上記$breakpointsのmapで設定したキーとmin or maxのペアで構成する
 $breakpointsClass: (
-  sp: s,
+  sp: (
+    s: max,
+  ),
   tb: (
-    s,
-    m,
+    s: min,
+    m: max,
   ),
 );
 
@@ -38,6 +39,47 @@ $headerHeight: (
 $fixedHeader: false;
 // ヘッダー固定時にmainにpadding-topを入れるかどうか
 $headerOverWrap: true;
+
+// bodyにかかる基本色
+$baseColor: #222222;
+$baseBg: #ffffff;
+
+// 色
+$colorList: (
+  "primary": #153940,
+  "secondary": #f5f4f3,
+  "accent": #ffeb00,
+  "caution": #8f8f8f,
+  "white": #fff,
+  "black": $baseColor,
+  "grey": #e5e5e5,
+  "add1": #f7f5f3,
+  "transparent": transparent,
+);
+
+// ::selectionカラー（テキスト選択時の色）
+$selectionBg: #{rgba(#153940, 0.7)};
+$selectionColor: #fff;
+
+// font-family
+$fontList: (
+  primary: (
+    ("Noto Sans JP", sans-serif),
+    600,
+  ),
+  secondary: (
+    ("Lato", sans-serif),
+    600,
+  ),
+  accent: (
+    ("Noto Serif JP", serif),
+    400,
+  ),
+  caution: (
+    serif,
+    400,
+  ),
+);
 
 // margin,paddingの汎用サイズ
 $spacesList: (
@@ -100,47 +142,10 @@ $borderRadiusList: (
   xl2: 100rem,
 );
 
-// bodyにかかる基本色
-$baseColor: #222222;
-$baseBg: #ffffff;
-
-// 色
-$colorList: (
-  "primary": #153940,
-  "secondary": #f5f4f3,
-  "accent": #ffeb00,
-  "caution": #8f8f8f,
-  "white": #fff,
-  "black": $baseColor,
-  "grey": #e5e5e5,
-  "add1": #f7f5f3,
-  "transparent": transparent,
-);
-
-// ::selectionカラー（テキスト選択時の色）
-$selectionBg: #{rgba(#153940, 0.7)};
-$selectionColor: #fff;
-
-// font-family
-$fontList: (
-  primary: (
-    ("Noto Sans JP", sans-serif),
-    600,
-  ),
-  secondary: (
-    ("Lato", sans-serif),
-    600,
-  ),
-  accent: (
-    ("Noto Serif JP", serif),
-    400,
-  ),
-  caution: (
-    serif,
-    400,
-  ),
-);
-
+// .block-common等のclass
+//spaceAmountは(PC(基本),TB,SP)のようにレスポンシブ時の値を設定
+// blockClassesはclass名と対応するプロパティ
+// blockSizesはそれぞれの〜倍の数値を設定(.block-common-largeのような形になる)
 $blockStyling: (
   spaceAmount: (
     default: map-get($spacesList, xl),
@@ -165,7 +170,8 @@ $blockStyling: (
   ),
 );
 
-// PC,SPの順番で幅を指定
+// .box-common等のclass
+// PC幅、SP幅の順に指定
 $boxStyling: (
   common: (
     1000px,
@@ -183,4 +189,136 @@ $boxStyling: (
     600px,
     calc(500px / 2),
   ),
+);
+
+// border出力の設定
+$borderIncrements: (
+  min: 0,
+  max: 10,
+  step: 0.1,
+  unit: rem,
+  properties: (
+    solid,
+    inherit,
+  ),
+);
+
+// gap出力の設定
+$gapIncrements: (
+  min: 0,
+  max: 20,
+  step: 1,
+  unit: "%",
+);
+
+// positionの位置(top,right,bottom,left)出力の設定
+$positionIncrements: (
+  (
+    min: -100,
+    max: -1,
+    step: 1,
+    unit: "%",
+  ),
+  (
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: "%",
+  )
+);
+// サイズ関係(width,height周り)出力の設定
+$sizingIncrements: (
+  (
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: "%",
+  ),
+  (
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: vw,
+    suffix: vw,
+  ),
+  (
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: vh,
+    suffix: vh,
+  )
+);
+// スペース関係(margin,padding周り)出力の設定
+$spacingIncrements: (
+  (
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: "%",
+    suffix: p,
+  ),
+  (
+    min: 0,
+    max: 100,
+    step: 1,
+    unit: vw,
+    suffix: vw,
+  )
+);
+// rotate出力の設定
+$rotateIncrements: (
+  min: 0,
+  max: 24,
+  step: 15,
+  unit: deg,
+  wrap: rotate,
+);
+// scale出力の設定
+$scaleIncrements: (
+  min: 0,
+  max: 20,
+  step: 0.1,
+  wrap: scale,
+);
+// translateX,Y出力の設定
+$translateXIncrements: (
+  (
+    min: -1,
+    max: -20,
+    step: 5,
+    unit: "%",
+    wrap: translateX,
+  ),
+  (
+    min: 0,
+    max: 20,
+    step: 5,
+    unit: "%",
+    wrap: translateX,
+  )
+);
+
+$translateYIncrements: (
+  (
+    min: -1,
+    max: -20,
+    step: 5,
+    unit: "%",
+    wrap: translateY,
+  ),
+  (
+    min: 0,
+    max: 20,
+    step: 5,
+    unit: "%",
+    wrap: translateY,
+  )
+);
+// transition出力の設定
+$transitionIncrements: (
+  min: 0,
+  max: 20,
+  step: 0.1,
+  unit: s,
 );

@@ -2,17 +2,6 @@
 
 /* utilities: borders */
 
-$borderIncrements: (
-  min: 0,
-  max: 10,
-  step: 0.1,
-  unit: rem,
-  properties: (
-    solid,
-    inherit,
-  ),
-);
-
 $utilities: (
   borders: (
     bd: (
@@ -114,5 +103,4 @@ $utilities: (
   ),
 );
 
-//@include utilityMap($utilities, "borders");
 @include utilityGenerator($utilities, "borders");

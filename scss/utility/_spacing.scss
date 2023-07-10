@@ -2,22 +2,6 @@
 
 /* utilities: spacing */
 
-$spacingIncrements: (
-  (
-    min: 0,
-    max: 100,
-    step: 1,
-    unit: "%",
-    suffix: p,
-  ),
-  (
-    min: 0,
-    max: 100,
-    step: 1,
-    unit: vw,
-    suffix: vw,
-  )
-);
 $spacingValuesAdditional: (
   a: auto,
 );
@@ -130,5 +114,4 @@ $utilities: (
   ),
 );
 
-//@include utilityMap($utilities, "spacing");
 @include utilityGenerator($utilities, "spacing");

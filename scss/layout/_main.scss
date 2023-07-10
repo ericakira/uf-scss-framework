@@ -1,0 +1,60 @@
+@use "../global" as *;
+
+/* -----------------------------
+
+main style
+
+----------------------------- */
+
+// 上下のセクション
+
+@each $classKey, $classVal in map-get($blockStyling, blockClasses) {
+  $classPrefix: "block";
+  $size: map-get($blockStyling, blockSizes);
+  $sizesLength: length($size);
+  @for $i from 1 through calc($sizesLength + 1) {
+    $sizesKeys: map-keys($size);
+    $sizesVals: map-values($size);
+    $hyphen: "";
+    $sizesKey: "";
+    $sizesVal: 1;
+    @if ($i > 1) {
+      $hyphen: "-";
+      $sizesKey: nth($sizesKeys, $i - 1);
+      $sizesVal: nth($sizesVals, $i - 1);
+    }
+    .#{$classPrefix}-#{$classKey}#{$hyphen}#{$sizesKey} {
+      @each $amountKey, $amountVal in map-get($blockStyling, spaceAmount) {
+        @if ($amountKey == default) {
+          @each $properties in $classVal {
+            #{$properties}: calc($amountVal * $sizesVal);
+          }
+        } @else {
+          @include mq($amountKey) {
+            @each $properties in $classVal {
+              #{$properties}: calc($amountVal * $sizesVal);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// // 左右のボックス幅
+
+@each $boxKey, $boxVal in $boxStyling {
+  $classPrefix: "box";
+  .#{$classPrefix}-#{$boxKey} {
+    margin-left: auto;
+    margin-right: auto;
+    @if (type-of($boxVal) == list) {
+      max-width: px-vw(nth($boxVal, 1), map-get($canvasSize, pc));
+      @include mq(s) {
+        max-width: px-vw(nth($boxVal, 2), map-get($canvasSize, sp));
+      }
+    } @else {
+      max-width: px-vw(nth($boxVal, 1), map-get($canvasSize, pc));
+    }
+  }
+}

@@ -29,65 +29,21 @@ $utilities: (
     tf-r: (
       property: transform,
       responsive: false,
-      increment: (
-        min: 0,
-        max: 24,
-        step: 15,
-        unit: deg,
-        wrap: rotate,
-      ),
+      increment: $rotateIncrements,
     ),
     tf-s: (
       property: transform,
-      increment: (
-        min: 0,
-        max: 20,
-        step: 0.1,
-        wrap: scale,
-      ),
+      increment: $scaleIncrements,
     ),
     tf-ty: (
       property: transform,
-      increment: (
-        min: 0,
-        max: 20,
-        step: 5,
-        unit: "%",
-        wrap: translateY,
-      ),
-    ),
-    tf-ty-m: (
-      property: transform,
-      increment: (
-        min: -1,
-        max: -20,
-        step: 5,
-        unit: "%",
-        wrap: translateY,
-      ),
+      increment: $translateXIncrements,
     ),
     tf-tx: (
       property: transform,
-      increment: (
-        min: 0,
-        max: 20,
-        step: 5,
-        unit: "%",
-        wrap: translateX,
-      ),
-    ),
-    tf-tx-m: (
-      property: transform,
-      increment: (
-        min: -1,
-        max: -20,
-        step: 5,
-        unit: "%",
-        wrap: translateX,
-      ),
+      increment: $translateYIncrements,
     ),
   ),
 );
 
-//@include utilityMap($utilities, "transform");
 @include utilityGenerator($utilities, "transform");

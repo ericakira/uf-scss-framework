@@ -2,21 +2,6 @@
 
 /* utilities: layout */
 
-$positionIncrements: (
-  (
-    min: -100,
-    max: -1,
-    step: 1,
-    unit: "%",
-  ),
-  (
-    min: 0,
-    max: 100,
-    step: 1,
-    unit: "%",
-  )
-);
-
 $utilities: (
   layout: (
     d: (
@@ -234,5 +219,4 @@ $utilities: (
   ),
 );
 
-//@include utilityMap($utilities, "layout");
 @include utilityGenerator($utilities, "layout");

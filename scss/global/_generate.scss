@@ -39,6 +39,18 @@
       $bpHyphen: "-";
       $bpValue: map-get($bp, $bpKey);
     }
+    @if (length($bpValue) >= 1 and $i > 0) {
+      @for $bpEach from 1 through length($bpValue) {
+        $and: "and";
+        @if $bpEach == length($bpValue) {
+          $and: "";
+        }
+        $k: nth(nth($bpValue, $bpEach), 1);
+        $v: nth(nth($bpValue, $bpEach), 2);
+        $mediaQuery: $mediaQuery +
+          "(#{$v}-width: #{map-get(s.$breakpoints,$k) - 1}) #{$and} ";
+      }
+    }
     @if (type-of($bpValue) == string) {
       $mediaQuery: "(max-width: #{map-get(s.$breakpoints,$bpValue) - 1})";
     } @else if(type-of($bpValue) == list) {
@@ -71,7 +83,7 @@
           $styleValues: map-get($mapValues, $utilityType);
           $return: ();
           @if type-of($styleValues) == list {
-            // incrementキーの値が配列だった場合（複数設定が入っている時）
+            // 値が配列だった場合（複数設定が入っている時）
             @for $i from 1 through length($styleValues) {
               $styles: null;
               @if $utilityType == nth($type, 2) {
@@ -89,12 +101,15 @@
             }
             $return: $flattened-array;
           } @else if type-of($styleValues) == map {
-            // incrementキーの値がマップだった場合（通常）
+            // 値がマップだった場合（通常）
             @if $utilityType == nth($type, 2) {
               $return: utilityIncrementSettings($styleValues);
             } @else {
               $return: $styleValues;
             }
+          } @else if type-of($styleValues) == string {
+            // class名末尾のsuffixが無いパターンを作りたい場合は、配列に３つ目の要素を入れて判定させる（賢くない）
+            $return: append($return, ("", $styleValues, null));
           }
           @each $returnVal in $return {
             $arg: null;
@@ -112,7 +127,11 @@
             } @else {
               $classSuffix: nth($returnVal, 1);
               $value: nth($returnVal, 2);
-              $hyphen: "-";
+              @if (length($returnVal) == 3) {
+                $hyphen: "";
+              } @else {
+                $hyphen: "-";
+              }
             }
             @if $functionName != null {
               $value: checkAndApplyFunction($value, $functionName);

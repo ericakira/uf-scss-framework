@@ -2,28 +2,6 @@
 
 /* utilities: sizing */
 
-$sizingIncrements: (
-  (
-    min: 0,
-    max: 100,
-    step: 1,
-    unit: "%",
-  ),
-  (
-    min: 0,
-    max: 100,
-    step: 1,
-    unit: vw,
-    suffix: vw,
-  ),
-  (
-    min: 0,
-    max: 100,
-    step: 1,
-    unit: vh,
-    suffix: vh,
-  )
-);
 $sizingValues: (
   maxc: max-content,
   minc: min-content,
@@ -60,5 +38,4 @@ $utilities: (
     ),
   ),
 );
-//@include utilityMap($utilities, "sizing");
 @include utilityGenerator($utilities, "sizing");
