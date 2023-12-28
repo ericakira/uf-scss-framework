@@ -37,11 +37,11 @@ $utilities: (
     ),
     tf-ty: (
       property: transform,
-      increment: $translateXIncrements,
+      increment: $translateYIncrements,
     ),
     tf-tx: (
       property: transform,
-      increment: $translateYIncrements,
+      increment: $translateXIncrements,
     ),
   ),
 );

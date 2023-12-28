@@ -95,18 +95,30 @@ $utilities: (
     pos-t: (
       property: top,
       increment: $positionIncrements,
+      values: (
+        a: auto,
+      )
     ),
     pos-r: (
       property: right,
       increment: $positionIncrements,
+      values: (
+        a: auto,
+      )
     ),
     pos-b: (
       property: bottom,
       increment: $positionIncrements,
+      values: (
+        a: auto,
+      )
     ),
     pos-l: (
       property: left,
       increment: $positionIncrements,
+      values: (
+        a: auto,
+      )
     ),
     pos-x: (
       property: (
